@@ -13,7 +13,7 @@ export default {
       },
       colors:{
         neutral:{
-          "white:": "#FFFFFF",
+          "white": "#FFFFFF",
           "black": "#000000",
         }, 
 
@@ -69,6 +69,11 @@ export default {
 
         /*Taille d'une image dans la page Produit*/
         "700": "700px",
+
+        'rem20':'20rem',
+      'rem30':'30rem',
+      'rem40':'40rem',
+      'rem50':'50rem',
       },
 
       maxWidth:{
@@ -84,6 +89,9 @@ export default {
 
         /*Taille d'une image dans la page Produit*/
         "700": "700px",
+        'rem20':'20rem',
+        'rem30':'30rem',
+        'rem40':'40rem',
 
 
       },
@@ -136,17 +144,7 @@ export default {
         "800": "800",
         "900": "900",
       },
-      height: {
-        'rem20':'20rem',
-        'rem30':'30rem',
-        'rem40':'40rem',
-    },
-    width: {
-      'rem20':'20rem',
-      'rem30':'30rem',
-      'rem40':'40rem',
-      'rem50':'50rem',
-  },
+     
 
 
 

@@ -80,6 +80,7 @@ let postRequest = async function(uri, data){
 }
 
 
+
 /**
  *  deleteRequest
  * 
@@ -111,4 +112,4 @@ let patchRequest = async function(uri, data){
 }
 
 
-export {getRequest, postRequest }
+export {getRequest, postRequest};

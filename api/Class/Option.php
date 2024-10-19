@@ -1,6 +1,6 @@
 <?php
 /**
- *  Class Product
+ *  Class option
  * 
  *  Représente un produit avec uniquement 3 propriétés (id, name, category)
  * 
@@ -8,13 +8,15 @@
  *  qui oblige à définir une méthode jsonSerialize. Cette méthode permet de dire comment les objets
  *  de la classe Product doivent être converti en JSON. Voire la méthode pour plus de détails.
  */
-class Category implements JsonSerializable {
-    private int $id; // id du produit
-    private string $name;
-    private string $image; // nom du produit
+class Option implements JsonSerializable {
+    private int $id_option; // id du produit
+    private string $name; // nom du produit
+    private int $idcategory; // id de la catégorie du produit
+    private string $image; // url de l'image du produit
 
-    public function __construct(int $id){
-        $this->id = $id;
+
+    public function __construct(int $id_option){
+        $this->id_option = $id_option;
     }
 
     /**
@@ -22,23 +24,23 @@ class Category implements JsonSerializable {
      */ 
     public function getId(): int
     {
-        return $this->id;
+        return $this->id_option;
     }
 
     /**
-     *  Define how to convert/serialize a Product to a JSON format
-     *  This method will be automatically invoked by json_encode when apply to a Product
+     *  Define how to convert/serialize a option to a JSON format
+     *  This method will be automatically invoked by json_encode when apply to a option
      * 
-     *  En français : On sait qu'on aura besoin de convertir des Product en JSON pour les
+     *  En français : On sait qu'on aura besoin de convertir des option en JSON pour les
      *  envoyer au client. La fonction json_encode sait comment convertir en JSON des données
      *  de type élémentaire. A savoir : des chaînes de caractères, des nombres, des booléens
      *  des tableaux ou des objets standards (stdClass). 
-     *  Mais json_encode ne saura pas convertir un objet de type Product dont les propriétés sont
+     *  Mais json_encode ne saura pas convertir un objet de type option dont les propriétés sont
      *  privées de surcroit. Sauf si on définit la méthode JsonSerialize qui doit retourner une
-     *  représentation d'un Product dans un format que json_encode sait convertir (ici un tableau associatif)
+     *  représentation d'un option dans un format que json_encode sait convertir (ici un tableau associatif)
      * 
-     *  Le fait que Product "implémente" l'interface JsonSerializable oblige à définir la méthode
-     *  JsonSerialize et permet à json_encode de savoir comment convertir un Product en JSON.
+     *  Le fait que option "implémente" l'interface JsonSerializable oblige à définir la méthode
+     *  JsonSerialize et permet à json_encode de savoir comment convertir un option en JSON.
      * 
      *  Parenthèse sur les "interfaces" : Une interface est une classe (abstraite en générale) qui
      *  regroupe un ensemble de méthodes. On dit que "une classe implémente une interface" au lieu de dire 
@@ -48,7 +50,7 @@ class Category implements JsonSerializable {
      *  
      */
     public function JsonSerialize(): mixed{
-        return ["id" => $this->id, "name" => $this->name , "image" => $this->image];
+        return ["id_option" => $this->id_option, "name" => $this->name, "category" => $this->idcategory, "image" => $this->image];
     }
 
     /**
@@ -71,21 +73,34 @@ class Category implements JsonSerializable {
     }
 
     /**
-     * Set the value of id
+     * Get the value of idcategory
+     */ 
+    public function getIdcategory()
+    {
+        return $this->idcategory;
+    }
+
+    /**
+     * Set the value of idcategory
      *
      * @return  self
      */ 
-    public function setId($id): self
+    public function setIdcategory(int $idcategory): self
     {
-        $this->id = $id;
+        $this->idcategory = $idcategory;
         return $this;
     }
 
- /**
+    /**
      * Set the value of id
      *
      * @return  self
      */ 
+    public function setId_option($id_option): self
+    {
+        $this->id_option = $id_option;
+        return $this;
+    }
 
     public function getImage(): string
     {
@@ -97,4 +112,10 @@ class Category implements JsonSerializable {
         $this->image = $image;
         return $this;
     }
+    /**
+     * Set the value of id
+     *
+     * @return  self
+     */ 
+
 }

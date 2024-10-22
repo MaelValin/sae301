@@ -14,9 +14,9 @@ ProductData.fetchAll = async function(){
     let data = await getRequest('products');
     return data;
 }
-
+/*
 ProductData.add = async function(data){
-    /*
+    
     data = {
         name: "name",
         price: 10,
@@ -24,10 +24,10 @@ ProductData.add = async function(data){
         image: "image",
         stock: 10
     }
-    */
+    
     let response = await postRequest('products', data);
     return response;
-}
+}*/
 
 
 export {ProductData};

@@ -30,6 +30,10 @@ import { ConnexionView } from "./ui/connexion/index.js";
 import { FooterHautView } from "./ui/footerhaut/index.js";
 import { FooterBasView } from "./ui/footerbas/index.js";
 
+import { PanierAdd } from "./data/panieradd.js";
+import { PanierUpdate } from "./data/panierupdate.js";
+import { PanierDelette } from "./data/panierdelete.js";
+
 let M = {};
 
 M.menuoption0 = [

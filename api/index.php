@@ -2,6 +2,8 @@
 require_once "Controller/ProductController.php";
 require_once "Controller/CategoryController.php";
 require_once "Controller/OptionController.php";
+require_once "Controller/ProductOptionController.php";
+require_once "Controller/PanierController.php";
 require_once "Class/HttpRequest.php";
 
 
@@ -29,7 +31,9 @@ require_once "Class/HttpRequest.php";
 $router = [
     "products" => new ProductController(),
     "category" => new CategoryController(),
-    "option" => new OptionController()
+    "option" => new OptionController(),
+    "productoption" => new ProductOptionController(),
+    "panier" => new PanierController(),
 ];
 
 // objet HttpRequest qui contient toutes les infos utiles sur la requêtes (voir class/HttpRequest.php)

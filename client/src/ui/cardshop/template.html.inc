@@ -2,12 +2,15 @@
   class="w-full h-fit md:w-rem20 md:h-rem40 bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden grid grid-cols-[min-content,1fr,max-content] grid-rows-[min-content,min-content] md:grid-cols-2 md:grid-rows-[min-content,min-content,min-content] py-15 px-15 md:py-4 md:px-4 gap-6 relative"
 >
   <div
+  id="detail" data-filter="{{id}}"
     class="w-16 h-24 md:w-full md:h-64 flex justify-center row-start-1 col-span-1 md:col-span-2"
   >
     <img
+    
       class="w-16 h-24 md:w-auto md:h-auto"
       src="./src/assets/cardshop/{{image}}"
       alt="Product Image"
+      
     />
   </div>
   <img

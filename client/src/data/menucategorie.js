@@ -9,7 +9,7 @@ let menu = async function (data) {
     html = html.replace("{{image}}", category.image);
 
     html = html.replace("{{alt}}", category.name);
-    html = html.replace("{{id}}", category.id);
+    html = html.replaceAll("{{id}}", category.id);
   }
 
   return html;

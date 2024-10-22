@@ -1,3 +1,55 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.btn-blue{
+    @apply px-20 py-15 text-15 font-700 text-center bg-nav-blue hover:bg-nav-blue-hover text-white rounded-5;
+}
+
+.btn-white{
+    @apply w-fit px-20 py-15 text-15 font-700 whitespace-nowrap text-nav-blue hover:text-nav-blue-hover bg-white;
+}
+
+.btn-red{
+    @apply w-[160px] py-15 text-15 font-700 bg-panier-red hover:bg-panier-red-hover text-white text-center;
+}
+
+.btn-black{
+    @apply w-full flex flex-row items-center gap-10 text-14 font-400 text-panier-black bg-white text-left hover:text-nav-blue-hover;
+}
+
+.input{
+    @apply  w-full px-15 py-15 text-15 text-panier-grey font-600 border border rounded-5;
+}
+
+.footer-bottom-section{
+    @apply flex flex-col  w-full md:w-fit p-15 md:p-0 gap-17 border-t border-accueil-grey md:border-t-0;
+}
+
+.footer-title{
+    @apply text-14 font-700;
+}
+
+.footer-icon{
+    @apply w-[32px] h-[24px];
+}
+
+.footer-icon-tall{
+    @apply w-[19px] h-[29px];
+}
+
+.footer-title-top{
+    @apply text-14 font-700 hidden md:block;
+}
+
+.footer-title-btn{
+    @apply text-14 font-700 w-full flex flex-row justify-between md:hidden;
+}
+
+.footer-group{
+    @apply md:w-[160px] flex flex-col justify-start p-10 gap-8;
+}
+
+.footer-link{
+    @apply text-13 font-400 text-neutral-black hover:underline ;
+}

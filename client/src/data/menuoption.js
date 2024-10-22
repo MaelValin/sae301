@@ -9,7 +9,8 @@ let option = async function (data) {
     html = html.replace("{{image}}", option.image);
 
     html = html.replace("{{alt}}", option.name);
-    html = html.replace("{{id}}", option.id);
+    html = html.replaceAll("{{category}}", option.category);
+    html = html.replaceAll("{{id}}", option.id_option);
   }
 
   return html;

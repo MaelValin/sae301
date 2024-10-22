@@ -17,7 +17,7 @@
     </label>
     <div
       id="menu"
-      class="menu flex flex-row w-fit font-sans ease-in-out duration-300 absolute top-full z-10 h-fit left-0 peer-has-[:checked]:bg-red-500  bg-white rounded-10 shadow-card"
+      class="menu flex flex-row w-fit font-sans ease-in-out duration-300 absolute top-full z-10 h-fit left-0 peer-has-[:checked]:translate-x-0 -translate-x-full  rounded-10 shadow-card"
     >
       <div
         class="categories flex flex-col items-center bg-menu-background-light w-min pl-16"

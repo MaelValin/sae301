@@ -33,6 +33,7 @@ class PanierRepository extends EntityRepository {
         $p = new Panier($answer->id_panier);
         $p->setIdProduct($answer->id_product);
         $p->setNumber($answer->number);
+        $p->setPrice($answer->price);
         return $p;
     }
 
@@ -46,6 +47,7 @@ class PanierRepository extends EntityRepository {
             $p = new Panier($obj->id_panier);
             $p->setIdProduct($obj->id_product);
             $p->setNumber($obj->number);
+            $p->setPrice($obj->price);
             array_push($res, $p);
         }
        
@@ -53,11 +55,13 @@ class PanierRepository extends EntityRepository {
     }
 
     public function save($panier){
-        $requete = $this->cnx->prepare("insert into Panier (id_product, number) values (:id_product, :number)");
+        $requete = $this->cnx->prepare("insert into Panier (id_product, number, price) values (:id_product, :number, :price)");
         $id_product = $panier->getIdProduct();
         $number = $panier->getNumber();
+        $price = $panier->getPrice();
         $requete->bindParam(':id_product', $id_product);
         $requete->bindParam(':number', $number);
+        $requete->bindParam(':price', $price);
 
         $answer = $requete->execute(); // an insert query returns true or false. $answer is a boolean.
 
@@ -69,14 +73,22 @@ class PanierRepository extends EntityRepository {
           
         return false;
     }
-
     public function delete($id_panier){
-        // Not implemented ! TODO when needed !
-        return false;
+        $requete = $this->cnx->prepare("delete from Panier where id_panier=:value");
+        $requete->bindParam(':value', $id_panier);
+        return $requete->execute();
     }
 
     public function update($panier){
-        // Not implemented ! TODO when needed !
-        return false;
+        $requete = $this->cnx->prepare("update Panier set id_product=:id_product, number=:number, price=:price where id_panier=:id_panier");
+        $id_panier = $panier->getId_panier();
+        $id_product = $panier->getIdProduct();
+        $number = $panier->getNumber();
+        $price = $panier->getPrice();
+        $requete->bindParam(':id_panier', $id_panier);
+        $requete->bindParam(':id_product', $id_product);
+        $requete->bindParam(':number', $number);
+        $requete->bindParam(':price', $price);
+        return $requete->execute();
     }
 }

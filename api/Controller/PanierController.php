@@ -35,6 +35,7 @@ class PanierController extends Controller {
         $p = new Panier(0); // 0 is a symbolic and temporary value since the panier does not have a real id yet.
         $p->setNumber($obj->number);
         $p->setIdProduct($obj->id_product);
+        $p->setPrice($obj->price); // Add this line to set the price
         $ok = $this->panier->save($p); 
         return $ok ? $p : false;
     }

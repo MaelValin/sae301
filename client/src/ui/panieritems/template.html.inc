@@ -1,5 +1,5 @@
 
-<div class="product flex flex-col md:flex-row items-center gap-25">
+<div class="product flex flex-col md:flex-row items-center gap-25 w-full justify-around">
     <div class="product flex flex-row items-center gap-10 md:gap-29">
         <img class="product-img w-auto h-[77px]" src="src/assets/cardshop/{{image}}" alt="product">
         <p class="product-name text-14 md:text-16 font-700 w-fit md:w-full">{{name}}</p>

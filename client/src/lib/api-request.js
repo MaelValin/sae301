@@ -92,7 +92,22 @@ let postRequest = async function(uri, data){
  *  La fonction retourne true ou false selon le succès de l'opération
  */
 let deleteRequest = async function(uri){
-   // Pas implémenté. TODO if needed.
+    let options = {
+        method: 'DELETE'
+    };
+
+    try{
+        var response = await fetch(API_URL+uri, options); // exécution (asynchrone) de la requête et attente de la réponse
+    }
+    catch(e){
+        console.error("Echec de la requête : "+e); // affichage de l'erreur dans la console
+        return false;
+    }
+    if (response.status != 200){
+        console.error("Erreur de requête : " + response.status); // affichage de l'erreur dans la console
+        return false; // si le serveur a renvoyé une erreur, on retourne false
+    }
+    return true; // si la suppression a réussi, on retourne true
 }
 
 
@@ -108,8 +123,28 @@ let deleteRequest = async function(uri){
  *  La fonction retourne true ou false selon le succès de l'opération
  */
 let patchRequest = async function(uri, data){
-   // Pas implémenté. TODO if needed.
+    let options = {
+        method: 'PATCH',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    try{
+        var response = await fetch(API_URL+uri, options); // exécution (asynchrone) de la requête et attente de la réponse
+    }
+    catch(e){
+        console.error("Echec de la requête : "+e); // affichage de l'erreur dans la console
+        return false;
+    }
+    if (response.status != 200){
+        console.error("Erreur de requête : " + response.status); // affichage de l'erreur dans la console
+        return false; // si le serveur a renvoyé une erreur, on retourne false
+    }
+    return true; // si la modification a réussi, on retourne true
 }
 
 
-export {getRequest, postRequest};
+
+export {getRequest, postRequest,deleteRequest,patchRequest};

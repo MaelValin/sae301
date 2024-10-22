@@ -11,9 +11,8 @@
 class Panier implements JsonSerializable {
     private int $id_panier;
     private int $id_product; // id du produit
-    private int $number; // nom du produit
-
-
+    private int $number;
+    private int $price; // prix du produit
 
     public function __construct(int $id_panier){
         $this->id_panier = $id_panier;
@@ -50,11 +49,16 @@ class Panier implements JsonSerializable {
      *  
      */
     public function JsonSerialize(): mixed{
-        return ["id_panier" => $this->id_panier, "id_product" => $this->id_product, "number" => $this->number];
+        return [
+            "id_panier" => $this->id_panier, 
+            "id_product" => $this->id_product, 
+            "number" => $this->number,
+            "price" => $this->price
+        ];
     }
 
     /**
-     * Get the value of name
+     * Get the value of number
      */ 
     public function getNumber()
     {
@@ -62,7 +66,7 @@ class Panier implements JsonSerializable {
     }
 
     /**
-     * Set the value of name
+     * Set the value of number
      *
      * @return  self
      */ 
@@ -73,7 +77,7 @@ class Panier implements JsonSerializable {
     }
 
     /**
-     * Get the value of idcategory
+     * Get the value of id_product
      */ 
     public function getIdProduct()
     {
@@ -81,7 +85,7 @@ class Panier implements JsonSerializable {
     }
 
     /**
-     * Set the value of idproduct
+     * Set the value of id_product
      *
      * @return  self
      */ 
@@ -91,9 +95,27 @@ class Panier implements JsonSerializable {
         return $this; // Retourne l'objet lui-même pour permettre les appels en chaîne
     }
     
-    
     /**
-     * Set the value of id
+     * Get the value of price
+     */ 
+    public function getPrice(): int
+    {
+        return $this->price;
+    }
+
+    /**
+     * Set the value of price
+     *
+     * @return  self
+     */ 
+    public function setPrice(int $price): self
+    {
+        $this->price = $price;
+        return $this;
+    }
+
+    /**
+     * Set the value of id_panier
      *
      * @return  self
      */ 
@@ -102,5 +124,4 @@ class Panier implements JsonSerializable {
         $this->id_panier = $id_panier;
         return $this;
     }
-
 }

@@ -9,7 +9,7 @@
       class="label inline-flex select-none cursor-pointer z-10 peer"
       for="check"
     >
-      <input type="checkbox" id="check"  />
+      <input type="checkbox" id="check" class="hidden"  />
       <div class="nav-btn flex items-center p-3 gap-3 border rounded">
         <img src="src/assets/svg/nav/burger.svg" alt="menu" />
         <span>Menu</span>
@@ -83,20 +83,30 @@
         ><img src="src/assets/svg/nav/profile.svg" alt="profil"
       /></a>
     </div>
-    <a
-      href="#"
+
+    <label
+      class="label inline-flex select-none cursor-pointer z-10 peer"
+      for="check1"
+    >
+      
+    <section
       class="nav-btn flex items-center p-3 gap-3 border rounded-3xl self-start"
     >
+    <input type="checkbox" id="check1" class="hidden"/>
       <img src="src/assets/svg/nav/cart.svg" alt="panier" />
       <span class="hidden md:contents">Panier</span>
-    </a>
+  </section>
+</label>
+
+
     <section
-      class="panier absolute top-full right-0 z-10 w-[355px] md:w-[455px] h-screen flex flex-col justify-center items-center p-15 gap-20 bg-white rounded-10 shadow-card"
+      class="panier absolute top-full right-0 z-10 w-[355px] md:w-[455px] h-screen flex flex-col justify-center items-center p-15 gap-20 bg-white rounded-10 shadow-card ease-in-out duration-300 peer-has-[:checked]:translate-x-0 translate-x-full"
     >
       <img
-        class="cross absolute top-0 right-0 m-4"
+        class="cross absolute top-0 right-0 m-4 cursor-pointer"
         src="src/assets/svg/menu/x.svg"
         alt="croix"
+        onclick="document.getElementById('check1').checked = false;"
       />
       <div id="panier" class="w-full h-full flex flex-col justify-center items-center p-15 gap-2">
         <div class="head flex flex-col justify-center py-30">

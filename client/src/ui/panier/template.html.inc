@@ -15,7 +15,7 @@
                 </div>
             </div>
         </div>
-        <div id="panier_item"></div>
+        <div id="panier_item" class="flex justify-center flex-col items-center"></div>
     
        <!--item panier-->
     

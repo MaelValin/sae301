@@ -99,7 +99,7 @@ C.init = async function () {
   let nav = NavView.render(data);
 
 
-  /*let bienvenue = BienvenueView.render(data);
+  let bienvenue = BienvenueView.render(data);
     document.querySelector("#card").innerHTML = bienvenue;
     let actualites = ActualitesView.render(data);
     document.querySelector("#card").innerHTML += actualites;
@@ -114,7 +114,7 @@ C.init = async function () {
     let footerhaut = FooterHautView.render(data);
     document.querySelector("#footer").innerHTML += footerhaut;
     let footerbas = FooterBasView.render(data);
-    document.querySelector("#footer").innerHTML += footerbas;*/
+    document.querySelector("#footer").innerHTML += footerbas;
 
   let menuitem = await menu(datacategory);
   document.querySelector("#nav").innerHTML = nav;

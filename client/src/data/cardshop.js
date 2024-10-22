@@ -7,7 +7,7 @@ let cardshop = async function (data) {
     html += template.replace("{{name}}", product.name);
 
     html = html.replace("{{price}}", product.price);
-    html = html.replace("{{id}}", product.id_product);
+    html = html.replaceAll("{{id}}", product.id_product);
 
     html = html.replace("{{image}}", product.image);
 

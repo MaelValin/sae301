@@ -7,8 +7,9 @@ let detailproduct = async function (data) {
   let html = "";
  
     html += template.replace("{{name}}", data.name);
-    console.log(html);
+    
     html = html.replace("{{price}}", data.price);
+    html = html.replaceAll("{{id}}", data.id_product);
 
     html = html.replace("{{image}}", data.image);
 

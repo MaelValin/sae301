@@ -50,8 +50,8 @@
         <p class="text text-14 font-600">Le prix de ce produit dépend de votre mode de retrait (Drive ou Livraison) et
           de votre magasin.</p>
       </div>
-      <a href="#" class="button w-full py-11 rounded-5 text-center text-18 font-700 bg-nav-blue text-white">Ajouter au
-        panier</a>
+      <button href="#" class="button w-full py-11 rounded-5 text-center text-18 font-700 bg-nav-blue text-white" id="add-to-panier" data-filter="{{id}}">Ajouter au
+        panier</button>
     </div>
   </div>
   <div class="description flex flex-col w-screen px-17 py-20 md:px-300 md:py-20 font-sans text-neutral-black">

@@ -1,5 +1,5 @@
 <div
-  class="w-full h-fit md:w-rem20 md:h-rem40 bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden grid grid-cols-[min-content,1fr,max-content] grid-rows-[min-content,min-content] md:grid-cols-2 md:grid-rows-[min-content,min-content,min-content] py-15 px-15 md:py-4 md:px-4 gap-6 relative"
+  class="w-full h-fit md:w-rem20 md:h-rem40 bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden grid grid-cols-[min-content,1fr,max-content] grid-rows-[min-content,min-content] md:grid-cols-2 md:grid-rows-[min-content,min-content,min-content] py-15 px-15 md:py-4 md:px-4 gap-6 relative" id="cardshop"
 >
   <div
   id="detail" data-filter="{{id}}"
@@ -27,6 +27,8 @@
   </h5>
   <button
     class="inline-flex items-center px-3 py-2 bg-blue-500 text-white font-medium rounded hover:bg-blue-600 row-start-2 col-start-3 md:row-start-2 md:col-start-2 w-fit justify-self-end"
+    id="add-to-panier"
+    onclick="addpanier('{{id}}')"
   >
     <img src="./src/assets/cardshop/shopadd.svg" class="w-8" alt="" />
   </button>

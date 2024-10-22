@@ -84,6 +84,13 @@ V.init = function () {
 
   let detail = document.querySelector("#card");
   detail.addEventListener("click", C.handler_clickOnDetail);
+
+  document.addEventListener("click", function (event) {
+    if (event.target && event.target.matches("[onclick^='addpanier']")) {
+      let id_product = event.target.getAttribute("onclick").match(/'(\d+)'/)[1];
+      C.addpanier(id_product);
+    }
+  });
 };
 
 let C = {};
@@ -244,5 +251,42 @@ C.handler_clickOnDetail = async function (ev) {
     console.error("Erreur dans handler_clickOnDetail :", error);
   }
 };
+
+
+
+C.addpanier = async function (id_product) {
+  try {
+    let quantity = 1;
+
+    let panierData = await PanierData.fetchAll();
+    let data = panierData.find((p) => p.id_product === parseInt(id_product));
+
+    if (data) {
+      let newQuantity = data.quantity + quantity;
+      await PanierUpdate.update(data.id_panier, newQuantity);
+    } else {
+      await PanierAdd.add(id_product, quantity);
+    }
+
+    let panierDataUpdated = await PanierData.fetchAll();
+    let panierView = await panier(panierDataUpdated);
+    document.querySelector("#panier").innerHTML = panierView;
+
+    let panierItemsData = await PanierData.fetchAll();
+
+    let datacardpanier = await ProductData.fetchAll();
+    datacardpanier = datacardpanier.filter(product =>
+      panierItemsData.some(item => item.id_product === product.id_product)
+    );
+
+    let panierItemsView = await panieritems(panierItemsData, datacardpanier);
+    document.querySelector("#panier_item").innerHTML = panierItemsView;
+
+  } catch (error) {
+    console.error("Erreur dans addpanier :", error);
+  }
+};
+
+
 
 C.init();

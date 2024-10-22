@@ -131,18 +131,21 @@ C.init = async function () {
 
   let panierItems = panierItemsData.map(item => {
     let product = data.find(p => p.id_product === item.id_product);
-    let panierItem = panierData.find(p => p.id_product === item.id_product);
     return {
       ...item,
-      product: product,
-      number: panierItem ? panierItem.number : 0
+      product: product
     };
-  });
+  }).filter(item => item.product !== undefined); // Filter out items without a matching product
 
-  let panierItemsView = await panieritems(panierItems);
+  let datacardpanier = data.filter(product => 
+    panierItemsData.some(item => item.id_product === product.id_product)
+  );
+
+  let panierItemsView = await panieritems(panierItems, datacardpanier);
   document.querySelector("#panier_item").innerHTML = panierItemsView;
 
 
+console.log(item.product)
 
 
 };

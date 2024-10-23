@@ -1,5 +1,4 @@
-<section class="panier relative  w-[355px] md:w-[455px] h-screen flex flex-col justify-center items-center p-15 gap-20 bg-white rounded-10 shadow-card">
-    <img class="cross absolute top-0 right-0 m-4" src="src/assets/svg/menu/x.svg" alt="croix">
+<section class="panier relative  w-[355px] md:w-[455px] h-screen flex flex-col justify-center items-center p-15 gap-20  rounded-10">
     <div class="head flex flex-col justify-center py-30">
         <img class="img" src="src/assets/svg/panier/panier.svg" alt="panier">
         <p class="title text-28 font-700">Votre panier est vide...</p>

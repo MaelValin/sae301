@@ -1,4 +1,4 @@
-<section class="panier relative w-[355px] md:w-[455px] h-screen flex flex-col p-15 gap-20 bg-white mx-auto md:mx-0 rounded-10 shadow-card">
+<section class="panier relative w-[355px] md:w-[455px] h-screen flex flex-col p-15 gap-20 mx-auto md:mx-0 ">
         <p class="title w-full text-nav-blue hover:text-nav-blue-hover text-28 font-700 pb-20 border-b border-neutral-black">Mon panier</p>
     
         <div class="info w-full pb-20 gap-4 border-b border-neutral-black">

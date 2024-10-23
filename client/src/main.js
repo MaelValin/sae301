@@ -30,10 +30,6 @@ import { ConnexionView } from "./ui/connexion/index.js";
 import { FooterHautView } from "./ui/footerhaut/index.js";
 import { FooterBasView } from "./ui/footerbas/index.js";
 
-import { PanierAdd } from "./data/panieradd.js";
-import { PanierUpdate } from "./data/panierupdate.js";
-import { PanierDelette } from "./data/panierdelete.js";
-
 let M = {};
 
 M.menuoption0 = [
@@ -82,11 +78,14 @@ V.init = function () {
   let option = document.querySelector("#option-content");
   option.addEventListener("click", C.handler_clickOnMenuoption);
 
-  let detail = document.querySelector("#card");
-  detail.addEventListener("click", C.handler_clickOnDetail);
-
-  let addToPanier = document.querySelector("#card");
-  addToPanier.addEventListener("click", C.addpanier) // C.addpanier);
+  document.querySelector("#card").addEventListener("click", function (ev) {
+    if (ev.target && ev.target.id === "detail") {
+      C.handler_clickOnDetail(ev);
+    }
+    if (ev.target && ev.target.id === "addpanier") {
+      C.handler_clickAddPanier(ev);
+    }
+  });
   
 };
 
@@ -126,7 +125,7 @@ C.init = async function () {
   document.querySelector("#option-content").innerHTML = optionmenu;
 
 
-  let panierData = await PanierData.fetchAll();
+  let panierData = await PanierData.get();
   if (panierData.length > 0) {
     let panierView = await panier(panierData);
     document.querySelector("#panier").innerHTML = panierView;
@@ -135,10 +134,10 @@ C.init = async function () {
     document.querySelector("#panier").innerHTML = panierVideView;
   }
 
-  let panierItemsData = await PanierData.fetchAll();
+  let panierItemsData = await PanierData.get();
 
 
-  let datacardpanier = data.filter(product => 
+  let datacardpanier = datacardpanier.filter(product => 
     panierItemsData.some(item => item.id_product === product.id_product)
   );
 
@@ -249,24 +248,31 @@ C.handler_clickOnDetail = async function (ev) {
   }
 };
 
-
-
-C.addpanier = async function (productId) {
+C.handler_clickAddPanier=async function(ev){
   try {
-    let product = await ProductData.fetch(productId);
-    if (product) {
-      await PanierAdd.add(product);
-      let panierData = await PanierData.fetchAll();
-      let panierView = await panier(panierData);
-      document.querySelector("#panier").innerHTML = panierView;
-    } else {
-      console.error("Produit non trouvé pour l'ID :", productId);
+    let productId = ev.target.dataset.filter;
+    console.log("productId", productId);
+    if (productId) {
+      let panierData = await PanierData.get();
+      panierData.push({ id_product: parseInt(productId) });
+      await PanierData.increase(panierData);
+
+      let datacardpanier = await ProductData.fetchAll();
+      let filteredProducts = datacardpanier.filter(product => 
+        panierData.some(item => item.id_product === product.id_product)
+      );
+
+      let panierItemsView = await panieritems(panierData, filteredProducts);
+      document.querySelector("#panier_item").innerHTML = panierItemsView;
     }
   } catch (error) {
-    console.error("Erreur dans addpanier :", error);
+    console.error("Erreur dans handler_clickAddPanier :", error);
   }
-};
+}
+
+
 
 
 
 C.init();
+

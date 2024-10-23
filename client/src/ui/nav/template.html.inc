@@ -70,7 +70,7 @@
     </button>
   </div>
   <div
-    class="flex flex-row gap-4 items-center md:col-span-1 md:col-start-3 col-span-1 col-start-2 row-start-1"
+    class="flex flex-row justify-end gap-4 items-center md:col-span-1 md:col-start-3 col-span-1 col-start-2 row-start-1"
   >
     <div class="nav__icons flex flex-row gap-4 md:gap-8">
       <a href="#" class="icon-btn"

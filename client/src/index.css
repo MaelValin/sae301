@@ -53,3 +53,67 @@
 .footer-link{
     @apply text-13 font-400 text-neutral-black hover:underline ;
 }
+
+.filtre-title-btn{
+    @apply p-10 text-18 font-600 w-full flex flex-row justify-between;
+}
+
+.filtre-layout{
+    @apply w-full flex-col p-10 gap-20 border-b border-accueil-grey;
+}
+
+.filtre-list{
+    @apply w-full flex-col gap-20;
+}
+
+.filtre-checkbox{
+    @apply w-full flex flex-row justify-start items-center gap-10;
+}
+
+.checkbox-label{
+    @apply gap-10 text-18 font-600;
+}
+
+.prix-group{
+    @apply flex flex-col gap-7;
+}
+
+.prix-input{
+    @apply w-full px-15 py-7 text-panier-grey border border-panier-grey rounded-5;
+}
+
+.filtre-btn{
+    @apply px-20 py-15 h-fit text-center border border-neutral-black rounded-30 hover:bg-menu-hover-blue;
+}
+
+.filtre-btn-list{
+    @apply w-full md:w-fit flex flex-row justify-center md:px-30 py-10 md:py-25 gap-10 border-y border-accueil-grey md:border md:border-neutral-black md:rounded-10 hover:text-nav-blue-hover;
+}
+
+.liste-btn-list{
+    @apply w-fit flex-row px-30 py-25 gap-10 border border-neutral-black rounded-10 hover:text-nav-blue-hover;
+}
+
+.categorie-card{
+    @apply min-w-full md:min-w-0 md:w-309 min-h-full flex flex-row md:flex-col justify-between text-left md:text-center bg-accueil-very-pale-blue hover:bg-accueil-grey-hover border border-neutral-black md:border-accueil-grey rounded-25 md:rounded-8;
+}
+
+.categorie-head{
+    @apply flex flex-col justify-center my-auto md:my-0 h-full px-6 md:px-0 md:py-45 gap-16;
+}
+
+.categorie-img{
+    @apply w-[194px] h-auto px-6 md:px-0 md:mx-auto;
+}
+
+.categorie-title{
+    @apply text-16 font-800;
+}
+
+.categorie-text{
+    @apply flex flex-col h-full w-full p-15 md:py-18 bg-white rounded-25 md:rounded-t-30 md:rounded-b-8 shadow-categorie md:shadow-none gap-7 flex-wrap;
+}
+
+.categorie-label{
+    @apply text-13 font-400;
+}

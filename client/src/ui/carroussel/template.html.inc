@@ -1,6 +1,6 @@
 <section class="carousel h-fit flex flex-col justify-center md:flex-row items-center md:justify-center gap-15 relative">
     <div
-        class="carousel-card-selection w-full h-fit md:w-rem20 md:h-rem40 flex flex-row md:flex-col justify-space md:items-center px-10 pt-10 pb-100 md:px-15 md:py-30 gap-25 bg-accueil-green rounded-5 relative">
+        class="carousel-card-selection w-full h-fit md:w-rem20 md:h-rem40 flex flex-row  md:flex-col justify-space items-center px-10 py-[3.125rem] md:px-15 md:py-30 gap-25 bg-accueil-green rounded-5 relative">
         <img class="selection-banner w-[123px] h-auto md:w-auto order-1 md:order-none"
             src="src/assets/carrousel/banner.webp" alt="banner">
         <div class="selection-text text-left md:text-center text-white">
@@ -11,7 +11,7 @@
         <a href="#" class="btn-white hidden md:block border border-nav-blue rounded-3">J'en profite</a>
     </div>
 
-    <div class="carrousel w-full flex flex-col md:flex-row px-10 md:px-0 gap-10 absolute md:relative top-1/2" id="carrousel">
+    <div class="carrousel w-full flex flex-col md:flex-row px-10 md:px-0 gap-10 top-1/2" id="carrousel">
         <!--à supprimer-->
         <div class="w-full h-fit md:w-rem20 md:h-rem40 bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden grid grid-cols-[min-content,1fr,max-content] grid-rows-[min-content,min-content] md:grid-cols-2 md:grid-rows-[min-content,min-content,min-content] py-15 px-15 md:py-4 md:px-4 gap-6 relative"
             id="cardshop">

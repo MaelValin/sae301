@@ -82,12 +82,36 @@ V.init = function () {
     if (ev.target && ev.target.id === "detail") {
       C.handler_clickOnDetail(ev);
     }
-    if (ev.target && ev.target.id === "addpanier") {
+    if (ev.target && ev.target.id === "add-to-panier") {
       C.handler_clickAddPanier(ev);
     }
   });
   
 };
+
+let paniervisuel=async function(){
+  let panierData = await PanierData.get();
+  let data = await ProductData.fetchAll();
+  if (panierData.nb!== 0) {
+    let panierView = await panier(panierData);
+    document.querySelector("#panier").innerHTML = panierView;
+
+    let panierItemsData = PanierData.get().items;
+
+  let datacardpanier = data.filter(product => 
+    panierItemsData.some(item => item.id_product === product.id_product)
+  );
+  let panierItemsView = await panieritems(panierItemsData, datacardpanier);
+  document.querySelector("#panier_item").innerHTML = panierItemsView;
+
+  } else {
+    let panierVideView = await PanierVideView.render();
+    document.querySelector("#panier").innerHTML = panierVideView;
+  }
+};
+
+
+
 
 let C = {};
 
@@ -125,30 +149,17 @@ C.init = async function () {
   document.querySelector("#option-content").innerHTML = optionmenu;
 
 
-  let panierData = await PanierData.get();
-  if (panierData.length > 0) {
-    let panierView = await panier(panierData);
-    document.querySelector("#panier").innerHTML = panierView;
-  } else {
-    let panierVideView = await PanierVideView.render();
-    document.querySelector("#panier").innerHTML = panierVideView;
-  }
-
-  let panierItemsData = await PanierData.get();
-
-
-  let datacardpanier = datacardpanier.filter(product => 
-    panierItemsData.some(item => item.id_product === product.id_product)
-  );
-
-  let panierItemsView = await panieritems(panierItemsData, datacardpanier);
-  document.querySelector("#panier_item").innerHTML = panierItemsView;
-
+  paniervisuel();
+  
 
 
 
 
 };
+
+
+
+
 
 C.handler_clickOnMenucategory = async function (ev) {
   try {
@@ -248,27 +259,39 @@ C.handler_clickOnDetail = async function (ev) {
   }
 };
 
-C.handler_clickAddPanier=async function(ev){
-  try {
+C.handler_clickAddPanier = async function (ev) {
+  try {{
     let productId = ev.target.dataset.filter;
-    console.log("productId", productId);
+    
     if (productId) {
-      let panierData = await PanierData.get();
-      panierData.push({ id_product: parseInt(productId) });
-      await PanierData.increase(panierData);
+      let panierData = PanierData.get();
+      let product = await ProductData.fetch(productId);
+      let existingItem = panierData.items.find(item => item.id_product === parseInt(productId));
+      
+      if (existingItem) {
+      PanierData.increase(productId);
+      paniervisuel();
+      } else {
+      PanierData.add({ id_product: parseInt(productId), price: product[0].price, number: 1 });
+      paniervisuel();
+      }
+      
+      console.log(PanierData.increase(productId));
+      
+    }
 
       let datacardpanier = await ProductData.fetchAll();
-      let filteredProducts = datacardpanier.filter(product => 
-        panierData.some(item => item.id_product === product.id_product)
+      let filteredProducts = datacardpanier.filter(product =>
+        PanierData.items.some(item => item.id_product === product.id_product)
       );
 
-      let panierItemsView = await panieritems(panierData, filteredProducts);
+      let panierItemsView = await panieritems(PanierData.items, filteredProducts);
       document.querySelector("#panier_item").innerHTML = panierItemsView;
     }
   } catch (error) {
     console.error("Erreur dans handler_clickAddPanier :", error);
   }
-}
+};
 
 
 

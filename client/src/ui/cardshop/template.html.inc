@@ -3,13 +3,15 @@
 >
   <div
   id="detail" data-filter="{{id}}" value="detail"
-    class="w-16 h-24 md:w-full md:h-64 flex justify-center row-start-1 col-span-1 md:col-span-2"
+    class="w-16 h-24 md:w-full md:h-64 flex justify-center row-start-1 col-span-1 md:col-span-2 hover:scale-95"
   >
     <img
     
       class="w-16 h-24 md:w-auto md:h-auto"
       src="./src/assets/cardshop/{{image}}"
       alt="Product Image"
+      id="detail"
+      data-filter="{{id}}" value="detail"
       
     />
   </div>
@@ -31,7 +33,8 @@
     data-filter="{{id}}"
     value="addpanier"
   >
-    <img src="./src/assets/cardshop/shopadd.svg" class="w-8" alt="" />
+    <img src="./src/assets/cardshop/shopadd.svg" class="w-8" alt="" data-filter="{{id}}"
+    value="addpanier" id="add-to-panier" />
   </button>
   <div class="md:row-start-3 md:col-span-1 md:col-span-2 flex flex-col gap-2">
     <h1 class="text-xl font-bold text-black">{{name}}</h1>

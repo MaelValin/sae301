@@ -18,7 +18,7 @@ PanierData.get = function(){
 
 PanierData.add = function(item){
     this.items.push(item);
-    this.total += item.prix;
+    this.total += item.price;
     this.nb++;
 };
 
@@ -26,8 +26,8 @@ PanierData.add = function(item){
 PanierData.delete = function(itemid){
     let item = this.items.find(item => item.id == itemid);
     if(item){
-        this.total -= item.prix * item.quantite;
-        this.nb -= item.quantite;
+        this.total -= item.price * item.number;
+        this.nb -= item.number;
         this.items = this.items.filter(item => item.id != itemid);
     }
 }
@@ -36,10 +36,10 @@ PanierData.delete = function(itemid){
 PanierData.remove = function(itemid){
     let item = this.items.find(item => item.id == itemid);
     if(item){
-        this.total -= item.prix;
+        this.total -= item.price;
         this.nb--;
-        item.quantite--;
-        if(item.quantite == 0){
+        item.number--;
+        if(item.number == 0){
             this.delete(itemid);
         }
     }
@@ -48,9 +48,9 @@ PanierData.remove = function(itemid){
 PanierData.increase = function(itemid){
     let item = this.items.find(item => item.id == itemid);
     if(item){
-        this.total += item.prix;
+        this.total += item.price;
         this.nb++;
-        item.quantite++;
+        item.number++;
     }
 };
 

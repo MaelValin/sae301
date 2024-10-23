@@ -96,21 +96,19 @@ V.init = function () {
   
 };
 
-let paniervisuel=async function(){
-  let panierData = await PanierData.get();
+let paniervisuel = async function () {
+  let paniertab = PanierData.get();
   let data = await ProductData.fetchAll();
-  if (panierData.nb!== 0) {
-    let panierView = await panier(panierData);
+  if (paniertab.nb !== 0) {
+    let panierView = await panier(paniertab);
     document.querySelector("#panier").innerHTML = panierView;
 
-    let panierItemsData = PanierData.get().items;
-
-  let datacardpanier = data.filter(product => 
-    panierItemsData.some(item => item.id_product === product.id_product)
-  );
-  let panierItemsView = await panieritems(panierItemsData, datacardpanier);
-  document.querySelector("#panier_item").innerHTML = panierItemsView;
-
+    let panierItemsData = paniertab.items;
+    let datacardpanier = data.filter(product =>
+      panierItemsData.some(items => items.id === product.id_product)
+    );
+    let panierItemsView = await panieritems(panierItemsData, datacardpanier);
+    document.querySelector("#panier_item").innerHTML = panierItemsView;
   } else {
     let panierVideView = await PanierVideView.render();
     document.querySelector("#panier").innerHTML = panierVideView;
@@ -279,9 +277,9 @@ C.handler_clickOnDetail = async function (ev) {
 C.handler_clickAddPanier = async function (ev) {
   try {{
     let productId = ev.target.dataset.filter;
-    
+    let paniertab = PanierData.get();
     if (productId) {
-      let panierData = PanierData.get();
+      
       let product = await ProductData.fetch(productId);
       
         PanierData.addOrIncrease({ id: parseInt(productId), price: product[0].price, number: 1 });
@@ -292,13 +290,14 @@ C.handler_clickAddPanier = async function (ev) {
 
       let datacardpanier = await ProductData.fetchAll();
       let filteredProducts = datacardpanier.filter(product =>
-        PanierData.items.some(item => item.id_product === product.id_product)
+        PanierData.get().items.some(items => items.id === product.id_product)
       );
-      console.log(PanierData);
-
-      let panierItemsView = await panieritems(PanierData.items, filteredProducts);
+      
+      let panierItemsView = await panieritems(paniertab.items
+      , filteredProducts);
+      
       document.querySelector("#panier_item").innerHTML = panierItemsView;
-      console.log(panieritems);
+      
     }
   } catch (error) {
     console.error("Erreur dans handler_clickAddPanier :", error);

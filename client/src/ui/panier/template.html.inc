@@ -29,5 +29,5 @@
             <p clas="prix">{{total}}€</p>
         </div>
     
-        <a href="#" class="btn-blue w-full">Voir mon panier</a>
+        <button class="btn-blue w-full" value="valider">Voir mon panier</button>
     </section>

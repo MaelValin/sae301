@@ -139,6 +139,10 @@ C.init = async function () {
     document.querySelector("#card").innerHTML += pubfull;
 
 
+    let card = await cardshop(data.slice(0, 3));
+    document.querySelector("#carrousel").innerHTML += card;
+console.log(data.slice(0, 3));
+console.log(card);
 
     let categorieavantages = CategorieAvantagesView.render(data);
     document.querySelector("#card").innerHTML+= categorieavantages;

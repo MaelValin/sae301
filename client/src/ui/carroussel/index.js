@@ -1,6 +1,6 @@
 import { genericRenderer } from "../../lib/utils.js"; 
 
-const templateFile = await fetch("src/ui/carrousel/template.html.inc");
+const templateFile = await fetch("src/ui/carroussel/template.html.inc");
 const template = await templateFile.text();
 
 
@@ -24,10 +24,10 @@ const template = await templateFile.text();
     }
 }*/
 
-let CarrouselView = {
+let CarrousselView = {
     render: function(data){
         return genericRenderer(template, { items: data });
     }
 }
 
-export {CarrouselView};
+export {CarrousselView};

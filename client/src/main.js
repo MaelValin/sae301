@@ -30,6 +30,10 @@ import { ConnexionView } from "./ui/connexion/index.js";
 import { FooterHautView } from "./ui/footerhaut/index.js";
 import { FooterBasView } from "./ui/footerbas/index.js";
 
+import { FiltreView } from "./ui/filtre/index.js";
+import { CategorieAvantagesView } from "./ui/categorieavantages/index.js";
+import {CarrousselView} from "./ui/carroussel/index.js";
+
 let M = {};
 
 M.menuoption0 = [
@@ -130,8 +134,14 @@ C.init = async function () {
     document.querySelector("#card").innerHTML += pubfull;
     let marques = MarquesView.render(data);
     document.querySelector("#card").innerHTML += marques;
+    let carroussel = CarrousselView.render(data);
+    document.querySelector("#card").innerHTML += carroussel;
     document.querySelector("#card").innerHTML += pubfull;
 
+
+
+    let categorieavantages = CategorieAvantagesView.render(data);
+    document.querySelector("#card").innerHTML+= categorieavantages;
     let actions = ActionsView.render(data);
     document.querySelector("#footer").innerHTML = actions;
     let footerhaut = FooterHautView.render(data);

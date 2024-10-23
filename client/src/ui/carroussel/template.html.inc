@@ -1,4 +1,4 @@
-<section class="carousel h-fit flex flex-col md:flex-row items-center md:justify-center gap-15 relative">
+<section class="carousel h-fit flex flex-col justify-center md:flex-row items-center md:justify-center gap-15 relative">
     <div
         class="carousel-card-selection w-full h-fit md:w-rem20 md:h-rem40 flex flex-row md:flex-col justify-space md:items-center px-10 pt-10 pb-100 md:px-15 md:py-30 gap-25 bg-accueil-green rounded-5 relative">
         <img class="selection-banner w-[123px] h-auto md:w-auto order-1 md:order-none"

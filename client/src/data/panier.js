@@ -1,4 +1,4 @@
-import {getRequest} from '../lib/api-request.js';
+import {getRequest,postRequest,deleteRequest,patchRequest} from '../lib/api-request.js';
 
 
 let PanierData = {
@@ -71,6 +71,17 @@ PanierData.fetch = async function(id){
 PanierData.fetchAll = async function(){
     let data = await getRequest('panier');
     return data;
+}
+
+//genere la méthode save qui envoie le panier au serveur
+PanierData.save = async function(data) {
+    // Assuming the server expects an array of items for the 'panier' endpoint
+    let results = [];
+    for (const item of data) {
+        let res = await postRequest('panier', JSON.stringify(item)); // Send each item as JSON
+        results.push(res); // Collect responses for each item if needed
+    }
+    return results; // Return all responses if needed
 }
 
 

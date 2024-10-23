@@ -112,6 +112,12 @@ V.init = function () {
     } else if (ev.target.closest("button") && ev.target.closest("button").value === "delete") {
       C.handler_clickOnstockdelete();
     }
+
+    if (ev.target && ev.target.value === "valider") {
+      C.handler_clickOnstockvalider();
+    } else if (ev.target.closest("button") && ev.target.closest("button").value === "valider") {
+      C.handler_clickOnstockvalider();
+    }
     
 });
 
@@ -328,8 +334,6 @@ C.handler_clickOnstocknumber = async function (ev) {
   try {
     let action = ev.target.getAttribute("value"); // Récupère la valeur du bouton cliqué (plus ou minus)
     let productId = ev.target.closest("button").dataset.productId; // Utilise closest pour remonter au bouton si nécessaire
-    console.log("action", action);
-    console.log("productId", productId);
 
     if (action) {
       if (action === "plus") {
@@ -354,6 +358,37 @@ C.handler_clickOnstockdelete = async function () {
     }
    catch (error) {
     console.error("Erreur dans handler_clickOnstockdelete :", error);
+  }
+}
+
+
+C.handler_clickOnstockvalider = async function () {
+  try {
+    
+    let paniertab = PanierData.get();
+    let datacardpanier = await ProductData.fetchAll();
+    // Prepare data to send to the server
+    let dataToSend = paniertab.items.map(item => {
+        let product = datacardpanier.find(p => p.id_product === item.id);
+        return {
+            id_product: item.id,
+            number: item.number,
+            price: product.price
+        };
+    });
+    
+    
+    // Ensure PanierData.save is defined and returns a promise
+    let response = await PanierData.save(dataToSend); // Await the promise
+    if (response) {
+      // Clear the panier
+      PanierData.clear();
+      paniervisuel();
+    }
+
+
+      }catch (error) {
+    console.error("Erreur dans handler_clickOnstockvalider :", error);
   }
 }
 

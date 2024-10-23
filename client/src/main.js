@@ -93,6 +93,28 @@ V.init = function () {
       C.handler_clickAddPanier(ev);
     }
   });
+
+ 
+
+  document.querySelector("#panier").addEventListener("click", function (ev) {
+    if (ev.target && (ev.target.value === "plus" || ev.target.value === "minus")) {
+      C.handler_clickOnstocknumber(ev);
+    } else if (ev.target.tagName === "IMG") {
+      let action = ev.target.getAttribute("value");
+      if (action === "plus" || action === "minus") {
+        C.handler_clickOnstocknumber(ev);
+      }
+      
+    }
+      
+    if (ev.target && ev.target.value === "delete") {
+      C.handler_clickOnstockdelete();
+    } else if (ev.target.closest("button") && ev.target.closest("button").value === "delete") {
+      C.handler_clickOnstockdelete();
+    }
+    
+});
+
   
 };
 
@@ -115,13 +137,9 @@ let paniervisuel = async function () {
   }
 };
 
-
-
-
-
-
-
 let C = {};
+
+
 
 C.init = async function () {
   let data = await ProductData.fetchAll();
@@ -303,6 +321,42 @@ C.handler_clickAddPanier = async function (ev) {
     console.error("Erreur dans handler_clickAddPanier :", error);
   }
 };
+
+
+//je veux recuperer les value: si celui si est minus, je veux enlever 1 au number de l'objet et si celui si est plus je veux ajouter 1 au number de l'objet a l'aide de la fonction addOrIncrease pour plus et remove pour minus
+C.handler_clickOnstocknumber = async function (ev) {
+  try {
+    let action = ev.target.getAttribute("value"); // Récupère la valeur du bouton cliqué (plus ou minus)
+    let productId = ev.target.closest("button").dataset.productId; // Utilise closest pour remonter au bouton si nécessaire
+    console.log("action", action);
+    console.log("productId", productId);
+
+    if (action) {
+      if (action === "plus") {
+        PanierData.addOrIncrease({ id: parseInt(productId), number: 1 });
+        
+      } else if (action === "minus") {
+        PanierData.remove(productId);
+       
+      }
+      paniervisuel();
+    }
+  } catch (error) {
+    console.error("Erreur dans handler_clickOnstocknumber :", error);
+  }
+};
+
+
+C.handler_clickOnstockdelete = async function () {
+  try {
+    PanierData.clear();
+      paniervisuel();
+    }
+   catch (error) {
+    console.error("Erreur dans handler_clickOnstockdelete :", error);
+  }
+}
+
 
 
 

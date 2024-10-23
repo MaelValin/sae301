@@ -100,7 +100,7 @@
 
 
     <section
-      class="panier absolute top-full right-0 z-10 w-[355px] md:w-[455px] h-screen flex flex-col justify-center items-center p-15 gap-20 bg-white rounded-10 shadow-card ease-in-out duration-300 peer-has-[:checked]:translate-x-0 translate-x-full"
+      class="panier absolute top-0  right-0 z-10 w-[355px] md:w-[455px] h-screen flex flex-col justify-center items-center p-15 gap-20 bg-white rounded-10 shadow-card ease-in-out duration-300 peer-has-[:checked]:translate-x-0 translate-x-full"
     >
       <img
         class="cross absolute top-0 right-0 m-4 cursor-pointer"

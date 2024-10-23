@@ -2,14 +2,14 @@
   class="carousel h-fit flex flex-col justify-center md:flex-row items-center w-full gap-15"
 >
   <div
-    class="carousel-card-selection w-full h-fit md:w-rem20 md:h-rem40 flex flex-row md:flex-col justify-space items-center px-10 py-[3.125rem] md:px-15 md:py-30 gap-25 bg-accueil-green rounded-5 relative"
+    class="carousel-card-selection w-full h-fit md:w-rem20 md:h-rem40 flex flex-col justify-center md:justify-space items-center px-10 py-[3.125rem] md:px-15 md:py-30 gap-25 bg-accueil-green rounded-5 relative"
   >
     <img
       class="selection-banner w-[123px] h-auto md:w-auto order-1 md:order-none"
       src="src/assets/carrousel/banner.webp"
       alt="banner"
     />
-    <div class="selection-text text-left md:text-center text-white">
+    <div class="selection-text text-left md:text-center text-white ">
       <p
         class="selection-title text-24 order-0 md:order-none md:text-32 font-800"
       >

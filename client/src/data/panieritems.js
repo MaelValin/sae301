@@ -7,6 +7,7 @@ let panieritems = async function (datapanier,dataproduct) {
   for (const panieritem of dataproduct) {
     let itemHtml = template.replaceAll("{{image}}", panieritem.image);
     itemHtml = itemHtml.replaceAll("{{price}}", panieritem.price);
+    itemHtml = itemHtml.replaceAll("{{id}}", panieritem.id_product);
     itemHtml = itemHtml.replaceAll("{{name}}", panieritem.name);
     
     const correspondingPanierItem = datapanier.find(items => items.id === panieritem.id_product);
@@ -17,7 +18,6 @@ let panieritems = async function (datapanier,dataproduct) {
     /*} else {
       itemHtml = itemHtml.replaceAll("{{stock}}", "0");*/
        // Dataproduct id
-console.log(correspondingPanierItem);
     }
     html += itemHtml;
   }

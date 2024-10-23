@@ -7,6 +7,7 @@ let PanierData = {
     nb: 0
 };
 
+
 PanierData.get = function(){
     return {
         items : [...this.items],
@@ -16,9 +17,16 @@ PanierData.get = function(){
 }
 
 
-PanierData.add = function(item){
-    this.items.push(item);
-    this.total += item.price;
+PanierData.addOrIncrease = function(item){
+    let existingItem = this.items.find(i => i.id == item.id);
+    if (existingItem) {
+        existingItem.number++;
+        this.total += existingItem.price;
+    } else {
+        this.items.push(item);
+        this.total += item.price;
+        item.number = 1;
+    }
     this.nb++;
 };
 
@@ -45,14 +53,6 @@ PanierData.remove = function(itemid){
     }
 };
 
-PanierData.increase = function(itemid){
-    let item = this.items.find(item => item.id == itemid);
-    if(item){
-        this.total += item.price;
-        this.nb++;
-        item.number++;
-    }
-};
 
 PanierData.fetch = async function(id){
     let data = await getRequest('panier/'+id);

@@ -1,9 +1,9 @@
 <section
-  class="nav w-full px-1 py-4 grid md:grid-cols-[max-content_1fr_max-content] grid-cols-2 md:grid-rows-1 grid-rows-[min-content_min-content] items-center md:px-9 md:py-3 gap-2 md:gap-4 justify-between relative"
+  class="nav w-full px-1 py-4 grid md:grid-cols-[max-content_1fr_max-content] grid-cols-2 md:grid-rows-1 grid-rows-[min-content_min-content] items-center md:px-9 md:py-3 gap-2 md:gap-4 justify-between  fixed bg-white z-10"
 >
   <div class="flex flex-row gap-8 items-center">
     <a href="#"
-      ><img class="nav__icon w-9 h-5" src="src/assets/logo/logo.png" alt="logo"
+      ><img class="nav__icon w-9 h-5" src="src/assets/logo/logo.png" alt="logo" id="homepage"
     /></a>
     <label
       class="label inline-flex select-none cursor-pointer z-10 peer"

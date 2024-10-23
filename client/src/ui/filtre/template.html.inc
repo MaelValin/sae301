@@ -7,9 +7,9 @@
     <div class="layout hidden md:flex flex flex-col md:flex-row" id="layout">
         <div class="filtres w-screen md:w-[326px] order-1 md:order-0">
             <div class="filtre-layout hidden md:flex">
-                <p class="results">14 résultats</p>
+                <p class="results">{{number}} résultats</p>
             </div>
-            <div class="filtre-layout">
+           <!-- <div class="filtre-layout">
                 <button class="filtre-title-btn" onclick="toggleList('list1', this)">Promotions<img class="arrow"
                         src="src/assets/svg/filtre/arrow.svg" alt="arrow"></button>
                 <div id="list1" class="filtre-list hidden flex">
@@ -96,6 +96,6 @@
                     <p class="font-700">Liste</p>
                 </button>
             </div>
-        </div>
+        </div>-->
     </div>
 </section>

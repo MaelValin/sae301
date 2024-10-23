@@ -29,10 +29,12 @@ import { CreerProfilView } from "./ui/creerprofil/index.js";
 import { ConnexionView } from "./ui/connexion/index.js";
 import { FooterHautView } from "./ui/footerhaut/index.js";
 import { FooterBasView } from "./ui/footerbas/index.js";
+import { contentView } from "./ui/content-card/index.js";
 
-import { FiltreView } from "./ui/filtre/index.js";
+import { filtre } from "./data/filtre.js";
 import { CategorieAvantagesView } from "./ui/categorieavantages/index.js";
 import {CarrousselView} from "./ui/carroussel/index.js";
+
 
 let M = {};
 
@@ -77,6 +79,7 @@ M.menuoption0 = [
 let V = {};
 
 V.init = function () {
+  
   let category = document.querySelector("#menu");
   category.addEventListener("click", C.handler_clickOnMenucategory);
   let option = document.querySelector("#option-content");
@@ -117,6 +120,9 @@ let paniervisuel=async function(){
 
 
 
+
+
+
 let C = {};
 
 C.init = async function () {
@@ -141,8 +147,6 @@ C.init = async function () {
 
     let card = await cardshop(data.slice(0, 3));
     document.querySelector("#carrousel").innerHTML += card;
-console.log(data.slice(0, 3));
-console.log(card);
 
     let categorieavantages = CategorieAvantagesView.render(data);
     document.querySelector("#card").innerHTML+= categorieavantages;
@@ -156,13 +160,9 @@ console.log(card);
   let menuitem = await menu(datacategory);
   document.querySelector("#nav").innerHTML = nav;
   document.querySelector("#contentmenu").innerHTML = menuitem;
-
-  V.init();
-
   let optionmenu = await option(M.menuoption0);
   document.querySelector("#option-content").innerHTML = optionmenu;
-
-
+  V.init();
   paniervisuel();
   
 
@@ -247,9 +247,12 @@ C.handler_clickOnMenuoption = async function (ev) {
 
       data = allData.filter((p) => filteredProductIds.includes(p.id_product));
     }
-
+    let content=await contentView.render();
+  let filtrecontent = await filtre(data.length);
     let htmlcard = await cardshop(data);
-    document.querySelector("#card").innerHTML = htmlcard;
+    document.querySelector("#card").innerHTML = filtrecontent;
+    document.querySelector("#card").innerHTML += content;
+    document.querySelector("#card_content").innerHTML += htmlcard;
   } catch (error) {
     console.error("Erreur dans handler_clickOnMenuoption :", error);
   }
@@ -280,17 +283,10 @@ C.handler_clickAddPanier = async function (ev) {
     if (productId) {
       let panierData = PanierData.get();
       let product = await ProductData.fetch(productId);
-      let existingItem = panierData.items.find(item => item.id_product === parseInt(productId));
       
-      if (existingItem) {
-      PanierData.increase(productId);
+        PanierData.addOrIncrease({ id: parseInt(productId), price: product[0].price, number: 1 });
       paniervisuel();
-      } else {
-      PanierData.add({ id_product: parseInt(productId), price: product[0].price, number: 1 });
-      paniervisuel();
-      }
       
-      console.log(PanierData.increase(productId));
       
     }
 
@@ -298,9 +294,11 @@ C.handler_clickAddPanier = async function (ev) {
       let filteredProducts = datacardpanier.filter(product =>
         PanierData.items.some(item => item.id_product === product.id_product)
       );
+      console.log(PanierData);
 
       let panierItemsView = await panieritems(PanierData.items, filteredProducts);
       document.querySelector("#panier_item").innerHTML = panierItemsView;
+      console.log(panieritems);
     }
   } catch (error) {
     console.error("Erreur dans handler_clickAddPanier :", error);

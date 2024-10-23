@@ -1,28 +1,17 @@
 import { genericRenderer } from "../../lib/utils.js"; 
 
-const templateFile = await fetch("src/ui/filtre/template.html.inc");
-const template = await templateFile.text();
+let FiltreView = {};
 
+FiltreView.templategetter = async function(){
+    const templateFile = await fetch("src/ui/filtre/template.html.inc");
+    const template = await templateFile.text();
+    return template;
+};
 
-/*let PubfullView = {
-
-    render: function(data){
-        let html = "";
-        for(let obj of data){
-            html += genericRenderer(template, obj);
-        }
-        
-        return html;
-    }
-
-}*/
-/*let cardshopView = {
-    render: function(data){
-        let combinedData = { items: data };
-        let html = genericRenderer(template, combinedData);
-        return html;
-    }
-}*/
+FiltreView.render = async function(data){
+    const template = await this.templategetter();
+    return genericRenderer(template, { items: data });
+};
 
 let toggleFiltres = function(id){
     let layout = document.getElementById(id);
@@ -31,7 +20,7 @@ let toggleFiltres = function(id){
     } else {
         layout.classList.add('hidden');
     }
-}
+};
 
 let toggleList = function(id, button) {
     let list = document.getElementById(id);
@@ -45,13 +34,7 @@ let toggleList = function(id, button) {
         list.classList.remove('flex');
         arrow.src = "src/assets/svg/filtre/arrow.svg";
     }
-}
-
-let FiltreView = {
-    render: function(data){
-        return genericRenderer(template, { items: data });
-    }
-}
+};
 
 window.toggleFiltres = toggleFiltres;
 window.toggleList = toggleList;

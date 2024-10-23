@@ -10,6 +10,7 @@ let panieritems = async function (datapanier,dataproduct) {
     const correspondingPanierItem = datapanier.find(item => item.id === panieritem.id);
     if (correspondingPanierItem) {
       itemHtml = itemHtml.replaceAll("{{stock}}", correspondingPanierItem.number);
+      console.log(correspondingPanierItem);
     } else {
       itemHtml = itemHtml.replaceAll("{{stock}}", "0");
     }

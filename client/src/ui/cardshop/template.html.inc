@@ -15,12 +15,6 @@
       
     />
   </div>
-  <img
-    src="./src/assets/cardshop/like.svg"
-    class="w-6 absolute top-4 right-4 cursor-pointer"
-    alt="Like"
-    id="like-icon"
-  />
 
   <h5
     class="text-4xl font-bold text-black row-start-2 col-start-2 md:row-start-2 md:col-start-1"

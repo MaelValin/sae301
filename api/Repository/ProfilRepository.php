@@ -23,15 +23,14 @@ class ProfilRepository extends EntityRepository {
     }
 
     public function find($idProfil): ?Profil {
-        $requete = $this->cnx->prepare("SELECT * FROM Profil WHERE idProfil=:value");
-        $requete->bindParam(':value', $idProfil);
-        $requete->execute();
+        $requete = $this->cnx->prepare("SELECT * FROM Profil WHERE idProfil=:value"); // prepare la requête SQL
+        $requete->bindParam(':value', $idProfil); // fait le lien entre le "tag" :value et la valeur de $id
+        $requete->execute(); // execute la requête
         $answer = $requete->fetch(PDO::FETCH_OBJ);
         
-        if ($answer == false) return null;
+        if ($answer == false) return null; // may be false if the sql request failed (wrong $id value for example)
         
-        $p = new Profil($answer->idProfil, Civilite::from($answer->civilite), $answer->nom, $answer->prenom, $answer->mail, $answer->password_hash);
-        return $p;
+        
     }
 
     public function findAll(): array {
@@ -39,11 +38,7 @@ class ProfilRepository extends EntityRepository {
         $requete->execute();
         $answer = $requete->fetchAll(PDO::FETCH_OBJ);
 
-        $res = [];
-        foreach($answer as $obj){
-            $p = new Profil($obj->idProfil, Civilite::from($obj->civilite), $obj->nom, $obj->prenom, $obj->mail, $obj->password_hash);
-            array_push($res, $p);
-        }
+        
        
         return $res;
     }
@@ -79,20 +74,31 @@ class ProfilRepository extends EntityRepository {
     }
 
     public function update($profil){
-        $requete = $this->cnx->prepare("UPDATE Profil SET nom=:nom, civilite=:civilite, prenom=:prenom, mail=:mail, password_hash=:password_hash WHERE idProfil=:idProfil");
+        $requete = $this->cnx->prepare("UPDATE Profil SET civilite=:civilite, nom=:nom, prenom=:prenom, mail=:mail, password_hash=:password_hash WHERE idProfil=:id");
         $idProfil = $profil->getIdProfil();
-        $nom = $profil->getNom();
         $civilite = $profil->getCivilite()->value;
+        $nom = $profil->getNom();
         $prenom = $profil->getPrenom();
         $mail = $profil->getMail();
         $password_hash = $profil->getPasswordHash();
         $requete->bindParam(':idProfil', $idProfil);
-        $requete->bindParam(':nom', $nom);
         $requete->bindParam(':civilite', $civilite);
+        $requete->bindParam(':nom', $nom);
         $requete->bindParam(':prenom', $prenom);
         $requete->bindParam(':mail', $mail);
         $requete->bindParam(':password_hash', $password_hash);
 
         return $requete->execute();
+    }
+
+    public function findByEmail($mail): ?Profil {
+        $requete = $this->cnx->prepare("SELECT * FROM Profil WHERE mail=:mail");
+        $requete->bindParam(':mail', $mail);
+        $requete->execute();
+        $answer = $requete->fetch(PDO::FETCH_OBJ);
+
+        if ($answer == false) return null;
+
+        return new Profil($answer->idProfil, Civilite::from($answer->civilite), $answer->nom, $answer->prenom, $answer->mail, $answer->password_hash);
     }
 }

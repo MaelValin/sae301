@@ -17,15 +17,18 @@ PanierData.get = function(){
 }
 
 
+
 PanierData.addOrIncrease = function(item){
     let existingItem = this.items.find(i => i.id == item.id);
     if (existingItem) {
         existingItem.number++;
         this.total += existingItem.price;
+        console.log(existingItem);
     } else {
+        item.number = 1; // Initialize the number property
         this.items.push(item);
         this.total += item.price;
-        item.number = 1;
+        console.log(item);
     }
     this.nb++;
 };

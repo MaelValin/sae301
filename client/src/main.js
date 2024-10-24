@@ -37,7 +37,7 @@ import { filtre } from "./data/filtre.js";
 import { CategorieAvantagesView } from "./ui/categorieavantages/index.js";
 import {CarrousselView} from "./ui/carroussel/index.js";
 import { postRequest } from "./lib/api-request.js";
-/*
+
 
 let M = {};
 
@@ -77,73 +77,73 @@ M.menuoption0 = [
     alt: "Le Petit Marseillais",
     category: "all",
   },
-];*/
+];
 
 let V = {};
 
 V.init = function () {
-  /*
-  let category = document.querySelector("#menu");
-  category.addEventListener("click", C.handler_clickOnMenucategory);
-  let option = document.querySelector("#option-content");
-  option.addEventListener("click", C.handler_clickOnMenuoption);
+  
+  if (window.location.pathname.includes("index.html")) {
+    let category = document.querySelector("#menu");
+    category.addEventListener("click", C.handler_clickOnMenucategory);
+    let option = document.querySelector("#option-content");
+    option.addEventListener("click", C.handler_clickOnMenuoption);
 
-  document.querySelector("#card").addEventListener("click", function (ev) {
-    if (ev.target && ev.target.id === "detail") {
-      C.handler_clickOnDetail(ev);
-    }
-    if (ev.target && ev.target.id === "add-to-panier") {
-      C.handler_clickAddPanier(ev);
-    }
-  });
-
-  let homepage = document.querySelector("#homepage");
-  homepage.addEventListener("click", C.handler_clickOnhomepage)
-
-
-
-
- 
-
-  document.querySelector("#panier").addEventListener("click", function (ev) {
-    if (ev.target && (ev.target.value === "plus" || ev.target.value === "minus")) {
-      C.handler_clickOnstocknumber(ev);
-    } else if (ev.target.tagName === "IMG") {
-      let action = ev.target.getAttribute("value");
-      if (action === "plus" || action === "minus") {
-        C.handler_clickOnstocknumber(ev);
+    document.querySelector("#card").addEventListener("click", function (ev) {
+      if (ev.target && ev.target.id === "detail") {
+        C.handler_clickOnDetail(ev);
       }
-      
-    }
-      
-    if (ev.target && ev.target.value === "delete") {
-      C.handler_clickOnstockdelete();
-    } else if (ev.target.closest("button") && ev.target.closest("button").value === "delete") {
-      C.handler_clickOnstockdelete();
-    }});
-*/
+      if (ev.target && ev.target.id === "add-to-panier") {
+        C.handler_clickAddPanier(ev);
+      }
+    });
 
-    let form = document.querySelector("#form");
-    console.log('Form element:', form); // Debugging statement to log the form element
-    if (form) {
-        form.addEventListener("submit", async function (event) {
-            event.preventDefault();
-            console.log('Form submitted'); // Debugging statement
+    let homepage = document.querySelector("#homepage");
+    homepage.addEventListener("click", C.handler_clickOnhomepage);
 
-            // Convert FormData to a plain object
-            let formData = new FormData(event.target);
-            let formDataObj = {};
-            formData.forEach((value, key) => {
-                formDataObj[key] = value;
-            });
+    document.querySelector("#panier").addEventListener("click", function (ev) {
+      if (ev.target && (ev.target.value === "plus" || ev.target.value === "minus")) {
+        C.handler_clickOnstocknumber(ev);
+      } else if (ev.target.tagName === "IMG") {
+        let action = ev.target.getAttribute("value");
+        if (action === "plus" || action === "minus") {
+          C.handler_clickOnstocknumber(ev);
+        }
+      }
 
-            console.log('Form data object:', formDataObj); // Debugging statement to log the form data object
+      if (ev.target && ev.target.value === "delete") {
+        C.handler_clickOnstockdelete();
+      } else if (ev.target.closest("button") && ev.target.closest("button").value === "delete") {
+        C.handler_clickOnstockdelete();
+      }
+    });
+  }
 
-            // Send data as JSON
-            await ProfilData.save(JSON.stringify(formDataObj)); // Make sure it's JSON stringified
-        });
-    } else {
-        console.error('Form element not found');
+
+    if (window.location.pathname.includes("inscription.html")) {
+      let form = document.querySelector("#form");
+      console.log('Form element:', form); // Debugging statement to log the form element
+      if (form) {
+          form.addEventListener("submit", async function (event) {
+              event.preventDefault();
+              console.log('Form submitted'); // Debugging statement
+
+              // Convert FormData to a plain object
+              let formData = new FormData(event.target);
+              let formDataObj = {};
+              formData.forEach((value, key) => {
+                  formDataObj[key] = value;
+              });
+
+              console.log('Form data object:', formDataObj); // Debugging statement to log the form data object
+
+              // Send data as JSON
+              await ProfilData.save(formDataObj); // Make sure it's JSON stringified
+              window.location.href = "connexion.html"; // Redirect to connexion.html
+          });
+      } else {
+          console.error('Form element not found');
+      }
     }
 
     
@@ -153,11 +153,12 @@ V.init = function () {
 };
 
 
+
 document.addEventListener("DOMContentLoaded", V.init);
 
 
 
-/*
+
 let paniervisuel = async function () {
   let paniertab = PanierData.get();
   let data = await ProductData.fetchAll();
@@ -175,7 +176,7 @@ let paniervisuel = async function () {
     let panierVideView = await PanierVideView.render();
     document.querySelector("#panier").innerHTML = panierVideView;
   }
-};*/
+};
 
 
 ////formulaire profil
@@ -191,18 +192,6 @@ C.init = async function () {
   let datacategory = await CategoryData.fetchAll();
   let dataoption = await OptionData.fetchAll();
   let nav = NavView.render(data);
-
-
-//parti profil
-
-
-
-
-  
-    
-      
- /*
-  ///fin parti profil
 
   if (window.location.pathname.includes("index.html")) {
     let bienvenue = BienvenueView.render(data);
@@ -236,7 +225,7 @@ C.init = async function () {
     document.querySelector("#option-content").innerHTML = optionmenu;
     V.init();
     paniervisuel();
-  }*/
+  }
   
   V.init();
 
@@ -249,7 +238,7 @@ C.init = async function () {
 
 
 
-/*
+
 
 C.handler_clickOnMenucategory = async function (ev) {
   try {
@@ -357,7 +346,7 @@ C.handler_clickAddPanier = async function (ev) {
     let productId = ev.target.dataset.filter;
     let paniertab = PanierData.get();
     if (productId) {
-      
+      console.log(PanierData.get());
       let product = await ProductData.fetch(productId);
       
         PanierData.addOrIncrease({ id: parseInt(productId), price: product[0].price, number: 1 });
@@ -452,7 +441,7 @@ C.handler_clickOnhomepage = async function () {
 }
 
 
-/*
+
 document.addEventListener("DOMContentLoaded", function () {
   let form = document.querySelector("#formulaire"); 
   console.log(form);
@@ -488,7 +477,7 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     console.error('Formulaire non trouvé');
   }
-});*/
+});
 
 
 

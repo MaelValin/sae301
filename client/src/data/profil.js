@@ -15,7 +15,7 @@ ProfilData.fetchAll = async function(){
 ProfilData.save = async function (data) {
     try {
         let response = await postRequest('profil', JSON.stringify(data)); // Use postRequest here
-
+console.log(response);
         if (!response) {
             console.error('Server responded with an error');
             return false;

@@ -2,26 +2,25 @@
 require_once "Controller.php";
 require_once "Repository/ProfilRepository.php";
 
-// Cette classe hérite de la méthode jsonResponse et de la propriété $cnx de la classe parente Controller
-// Seules les méthodes process????Request doivent être (re)définies.
+// This class inherits the jsonResponse method and the $cnx property from the parent class Controller
+// Only the process????Request methods need to be (re)defined.
 
 class ProfilController extends Controller {
 
-    private ProfilRepository $profils;
+    private ProfilRepository $ProfilRepository;
 
     public function __construct(){
-        $this->profils = new ProfilRepository();
+        $this->ProfilRepository = new ProfilRepository();
     }
 
     protected function processGetRequest(HttpRequest $request) {
         $id = $request->getId("id");
         if ($id){
-            // URI est .../profils/{id}
-            $p = $this->profils->find($id);
+            // URI is .../profil/{id}
+            $p = $this->ProfilRepository->find($id);
             return $p == null ? false : $p;
         } else {
-            // URI est .../profils
-            return $this->profils->findAll();
+            return $this->ProfilRepository->findAll();
         }
     }
 
@@ -74,6 +73,42 @@ class ProfilController extends Controller {
         } catch (Exception $e) {
             error_log("Exception: " . $e->getMessage());
             return json_encode(['error' => $e->getMessage()]);
+        }
+    }
+    
+    /*
+    private function processSignupRequest(HttpRequest $request){
+        $mail = $request->getParam("mail");
+        $password_hash = $request->getParam("password_hash");
+
+        $user = $this->users->findByEmail($mail);
+
+        if ($user != null){
+            return false;
+        }
+
+        $hash_password = password_hash($password, PASSWORD_DEFAULT);
+
+        $userdata = [];
+        $userdata["mail"] = $mail;
+        $userdata["password"] = $hash_password;
+        $userdata ["nom"] = $request->getParam('nom');
+        $userdata ["prenom"] = $request->getParam('prenom');
+        $user = new User($userdata);
+        return $this->users->save($user);    
+        }
+    }*/
+
+    public function login(HttpRequest $request) {
+        $mail = $request->getParam("mail");
+        $password = $request->getParam("password");
+
+        $profil = $this->ProfilRepository->findByEmail($mail);
+        if ($profil && password_verify($password, $profil->getPasswordHash())) {
+            return $profil;
+        } else {
+            http_response_code(401); // Unauthorized
+            return false;
         }
     }
 }

@@ -36,7 +36,8 @@ import { ProfilData } from "./data/profil.js";
 import { filtre } from "./data/filtre.js";
 import { CategorieAvantagesView } from "./ui/categorieavantages/index.js";
 import {CarrousselView} from "./ui/carroussel/index.js";
-/*
+import { postRequest } from "./lib/api-request.js";
+
 
 let M = {};
 
@@ -122,18 +123,40 @@ V.init = function () {
     }
 
 
+    let form = document.querySelector("#form");
+    console.log('Form element:', form); // Debugging statement to log the form element
+    if (form) {
+        form.addEventListener("submit", async function (event) {
+            event.preventDefault();
+            console.log('Form submitted'); // Debugging statement
 
+            // Convert FormData to a plain object
+            let formData = new FormData(event.target);
+            let formDataObj = {};
+            formData.forEach((value, key) => {
+                formDataObj[key] = value;
+            });
 
+            console.log('Form data object:', formDataObj); // Debugging statement to log the form data object
 
+            // Send data as JSON
+            await postRequest('profil', JSON.stringify(formDataObj)); // Make sure it's JSON stringified
+        });
+    } else {
+        console.error('Form element not found');
+    }
 
-
-   
-    
     
 });
 
   
 };
+
+
+document.addEventListener("DOMContentLoaded", V.init);
+
+
+
 
 let paniervisuel = async function () {
   let paniertab = PanierData.get();
@@ -215,7 +238,7 @@ C.init = async function () {
     paniervisuel();
   }
   
-  
+  V.init();
 
 
 
@@ -428,30 +451,35 @@ C.handler_clickOnhomepage = async function () {
   C.init();
 }
 
-*/
 
+/*
 document.addEventListener("DOMContentLoaded", function () {
-  let form = document.querySelector("#form"); console.log(form);
-  console.log("hello");
+  let form = document.querySelector("#formulaire"); 
+  console.log(form);
+
   if (form) {
-    // Écouteur sur l'événement "submit" du formulaire
+    // Écoute l'événement "submit" sur le formulaire
     form.addEventListener("submit", async function (event) {
-      event.preventDefault(); // Empêche le comportement par défaut de rechargement de la page
-      console.log("hello");
-      let formData = new FormData(form); // Récupérer les données du formulaire
+      event.preventDefault(); // Empêche le comportement par défaut de soumission du formulaire
+
+      console.log("Soumission du formulaire interceptée.");
+
+      let formData = new FormData(form); // Récupère les données du formulaire
       let formDataObj = {};
+      
+      // Convertir FormData en objet simple
       formData.forEach((value, key) => {
         formDataObj[key] = value;
       });
 
-      console.log("Données du formulaire :", formDataObj); // Vérifie les données dans la console
+      console.log("Données du formulaire :", formDataObj); // Journaliser les données du formulaire pour le débogage
 
       try {
         // Envoie les données du formulaire à ProfilData.save()
         await ProfilData.save(formDataObj); 
         alert("Inscription réussie !");
-        
-        // Rediriger vers la page connexion.html après l'inscription
+
+        // Redirige vers "connexion.html" après une soumission réussie
         window.location.href = "connexion.html";
       } catch (error) {
         console.error("Erreur lors de l'inscription :", error);
@@ -460,7 +488,7 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     console.error('Formulaire non trouvé');
   }
-});
+});*/
 
 
 
@@ -471,6 +499,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-/*
-C.init();*/
+
+
+C.init();
 

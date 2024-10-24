@@ -24,7 +24,7 @@
         <input class="input row-span-1 md:col-start-2 md:col-end-3 md:row-start-2 md:row-end-3" type="text" id="nom" name="nom" placeholder="Nom *" required>
         <input class="input row-span-1 md:col-start-1 md:col-end-3 md:row-start-3 md:row-end-4" type="email" id="mail" name="mail" placeholder="E-mail *" required>
         <input class="input row-span-1 md:col-start-1 md:col-end-3 md:row-start-4 md:row-end-5" type="password" id="password_hash" name="password_hash" placeholder="Mot de passe *" required>
-        <input type="submit" class="btn-blue w-fit row-span-1 md:col-start-1 md:col-end-3 md:row-start-5 md:row-end-6 justify-self-center" id="valider-inscription" value="Créer mon compte">
+        <button type="submit" class="btn-blue w-fit row-span-1 md:col-start-1 md:col-end-3 md:row-start-5 md:row-end-6 justify-self-center" id="valider-inscription">Créer mon compte</button>
 
     </form>
 

@@ -12,15 +12,21 @@ ProfilData.fetchAll = async function(){
     return data;
 }
 
-//genere la méthode save qui envoie le Profil au serveur
-ProfilData.save = async function(data) {
-    // Assuming the server expects an array of items for the 'Profil' endpoint
-    console.log(data);
-        let res = await postRequest('profil', JSON.stringify(data)); // Send each item as JSON
-         // Collect responses for each item if needed
-         console.log(res);
-    return res; // Return all responses if needed
-}
+ProfilData.save = async function (data) {
+    try {
+        let response = await postRequest('profil', JSON.stringify(data)); // Use postRequest here
+
+        if (!response) {
+            console.error('Server responded with an error');
+            return false;
+        }
+
+        return response;
+    } catch (error) {
+        console.error('Error in ProfilData.add:', error);
+        return false;
+    }
+};
 
 
 export {ProfilData};

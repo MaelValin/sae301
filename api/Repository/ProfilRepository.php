@@ -30,12 +30,7 @@ class ProfilRepository extends EntityRepository {
         
         if ($answer == false) return null;
         
-        $p = new Profil($answer->idProfil);
-        $p->setNom($answer->nom);
-        $p->setCivilite(Civilite::from($answer->civilite));
-        $p->setPrenom($answer->prenom);
-        $p->setMail($answer->mail);
-        $p->setPasswordHash($answer->password_hash);
+        $p = new Profil($answer->idProfil, Civilite::from($answer->civilite), $answer->nom, $answer->prenom, $answer->mail, $answer->password_hash);
         return $p;
     }
 
@@ -46,12 +41,7 @@ class ProfilRepository extends EntityRepository {
 
         $res = [];
         foreach($answer as $obj){
-            $p = new Profil($obj->idProfil);
-            $p->setNom($obj->nom);
-            $p->setCivilite(Civilite::from($obj->civilite));
-            $p->setPrenom($obj->prenom);
-            $p->setMail($obj->mail);
-            $p->setPasswordHash($obj->password_hash);
+            $p = new Profil($obj->idProfil, Civilite::from($obj->civilite), $obj->nom, $obj->prenom, $obj->mail, $obj->password_hash);
             array_push($res, $p);
         }
        
@@ -59,23 +49,23 @@ class ProfilRepository extends EntityRepository {
     }
 
     public function save($profil){
-        $requete = $this->cnx->prepare("INSERT INTO Profil (nom, civilite, prenom, mail, password_hash) VALUES (:nom, :civilite, :prenom, :mail, :password_hash)");
-        $nom = $profil->getNom();
+        $requete = $this->cnx->prepare("INSERT INTO Profil (civilite, nom, prenom, mail, password_hash) VALUES (:civilite, :nom, :prenom, :mail, :password_hash)");
         $civilite = $profil->getCivilite()->value;
+        $nom = $profil->getNom();
         $prenom = $profil->getPrenom();
         $mail = $profil->getMail();
         $password_hash = $profil->getPasswordHash();
-        $requete->bindParam(':nom', $nom);
         $requete->bindParam(':civilite', $civilite);
+        $requete->bindParam(':nom', $nom);
         $requete->bindParam(':prenom', $prenom);
         $requete->bindParam(':mail', $mail);
         $requete->bindParam(':password_hash', $password_hash);
 
-        $answer = $requete->execute();
+        $answer = $requete->execute(); // an insert query returns true or false. $answer is a boolean.
 
         if ($answer){
-            $id = $this->cnx->lastInsertId();
-            $profil->setIdProfil($id);
+            $idProfil = $this->cnx->lastInsertId(); // retrieve the id of the last insert query
+            $profil->setIdProfil($idProfil); // set the profil id to its real value.
             return true;
         }
           

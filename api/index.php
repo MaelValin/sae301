@@ -35,7 +35,7 @@ $router = [
     "option" => new OptionController(),
     "productoption" => new ProductOptionController(),
     "panier" => new PanierController(),
-    "profil" => new ProfilController(),
+    "profil" => new ProfilController()
 ];
 
 // objet HttpRequest qui contient toutes les infos utiles sur la requêtes (voir class/HttpRequest.php)

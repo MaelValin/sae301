@@ -26,16 +26,55 @@ class ProfilController extends Controller {
     }
 
     protected function processPostRequest(HttpRequest $request) {
-        $json = $request->getJson();
-        $obj = json_decode($json);
-        $p = new Profil(0); // 0 est une valeur symbolique et temporaire puisque le profil n'a pas encore d'id réel.
-        $p->setNom($obj->nom);
-        $p->setCivilite(Profil::Civilite::from($obj->civilite));
-        $p->setPrenom($obj->prenom);
-        $p->setMail($obj->mail);
-        $p->setPasswordHash(password_hash($obj->password, PASSWORD_DEFAULT));
-        $ok = $this->profils->save($p);
-        return $ok ? $p : false;
+        try {
+            // Read the JSON payload
+            $data = file_get_contents("php://input");
+            $payload = json_decode($data, true);
+    
+            // Check if civilite is set
+            if (!isset($payload['civilite'])) {
+                throw new InvalidArgumentException('Civilite is required.');
+            }
+    
+            // Validate Civilite
+            $validCivilites = ['Monsieur', 'Madame'];
+            if (!in_array($payload['civilite'], $validCivilites)) {
+                throw new InvalidArgumentException('Invalid value for Civilite: ' . $payload['civilite']);
+            }
+    
+            // Extract other parameters
+            $nom = $payload['nom'] ?? '';
+            $prenom = $payload['prenom'] ?? '';
+            $mail = $payload['mail'] ?? '';
+            $password = $payload['mdp'] ?? '';
+    
+            // Validate other parameters
+            if (empty($nom) || empty($prenom) || empty($mail) || empty($password)) {
+                throw new InvalidArgumentException('All fields are required.');
+            }
+    
+            // Hash the password
+            $password_hash = password_hash($password, PASSWORD_BCRYPT);
+    
+            // Create a new Profil object
+            $profil = new Profil(0, Civilite::from($payload['civilite']), $nom, $prenom, $mail, $password_hash);
+    
+            // Save the profile using the repository
+            $success = $this->ProfilRepository->save($profil);
+    
+            // Check if the save was successful
+            if ($success) {
+                return json_encode($profil); // Return the created profile in the response
+            } else {
+                return json_encode(['error' => 'Failed to save profile']);
+            }
+        } catch (InvalidArgumentException $e) {
+            error_log("InvalidArgumentException: " . $e->getMessage());
+            return json_encode(['error' => $e->getMessage()]);
+        } catch (Exception $e) {
+            error_log("Exception: " . $e->getMessage());
+            return json_encode(['error' => $e->getMessage()]);
+        }
     }
 }
 ?>

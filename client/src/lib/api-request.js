@@ -55,33 +55,29 @@ let getRequest = async function(uri){
  *  Le serveur retourne en JSON la nouvelle ressource créée en base avec son identifiant.
  *  La fonction retourne les données après conversion en objet Javascript (ou false si la requête a échoué)
  */
-let postRequest = async function(uri, data){
-    
-
-    // Défition des options de la requêtes
+let postRequest = async function (uri, data) {
     let options = {
-        Credentials:'include',
         method: 'POST',
         headers: {
-            'Content-Type': 'multipart/form-data'
+            'Content-Type': 'application/json', // Set JSON content type
         },
-        body: data
-    }
+        body: data // This should be the JSON string from the formDataObj
+    };
 
-    try{
-        var response = await fetch(API_URL+uri, options); // exécution (asynchrone) de la requête et attente de la réponse
-    }
-    catch(e){
-        console.error("Echec de la requête : "+e); // affichage de l'erreur dans la console
+    try {
+        let response = await fetch(API_URL + uri, options); // Make the request
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('Server responded with an error:', errorText);
+            return false;
+        }
+
+        return await response.json(); // Handle the JSON response
+    } catch (error) {
+        console.error('Error in postRequest:', error);
         return false;
     }
-    if (response.status != 200){
-        console.error("Erreur de requête : " + response.status); // affichage de l'erreur dans la console
-        return false; // si le serveur a renvoyé une erreur, on retourne false
-    }
-    let $obj = await response.json(); // extraction du json retourné par le serveur (opération asynchrone aussi)
-    return $obj; // et on retourne le tout (response.json() a déjà converti le json en objet Javscript)
-}
+};
 
 
 

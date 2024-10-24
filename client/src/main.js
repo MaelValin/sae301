@@ -37,7 +37,7 @@ import { filtre } from "./data/filtre.js";
 import { CategorieAvantagesView } from "./ui/categorieavantages/index.js";
 import {CarrousselView} from "./ui/carroussel/index.js";
 import { postRequest } from "./lib/api-request.js";
-
+/*
 
 let M = {};
 
@@ -77,12 +77,12 @@ M.menuoption0 = [
     alt: "Le Petit Marseillais",
     category: "all",
   },
-];
+];*/
 
 let V = {};
 
 V.init = function () {
-  
+  /*
   let category = document.querySelector("#menu");
   category.addEventListener("click", C.handler_clickOnMenucategory);
   let option = document.querySelector("#option-content");
@@ -120,8 +120,8 @@ V.init = function () {
       C.handler_clickOnstockdelete();
     } else if (ev.target.closest("button") && ev.target.closest("button").value === "delete") {
       C.handler_clickOnstockdelete();
-    }
-
+    }});
+*/
 
     let form = document.querySelector("#form");
     console.log('Form element:', form); // Debugging statement to log the form element
@@ -140,14 +140,14 @@ V.init = function () {
             console.log('Form data object:', formDataObj); // Debugging statement to log the form data object
 
             // Send data as JSON
-            await postRequest('profil', JSON.stringify(formDataObj)); // Make sure it's JSON stringified
+            await ProfilData.save(JSON.stringify(formDataObj)); // Make sure it's JSON stringified
         });
     } else {
         console.error('Form element not found');
     }
 
     
-});
+
 
   
 };
@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", V.init);
 
 
 
-
+/*
 let paniervisuel = async function () {
   let paniertab = PanierData.get();
   let data = await ProductData.fetchAll();
@@ -175,7 +175,7 @@ let paniervisuel = async function () {
     let panierVideView = await PanierVideView.render();
     document.querySelector("#panier").innerHTML = panierVideView;
   }
-};
+};*/
 
 
 ////formulaire profil
@@ -201,7 +201,7 @@ C.init = async function () {
   
     
       
- 
+ /*
   ///fin parti profil
 
   if (window.location.pathname.includes("index.html")) {
@@ -236,7 +236,7 @@ C.init = async function () {
     document.querySelector("#option-content").innerHTML = optionmenu;
     V.init();
     paniervisuel();
-  }
+  }*/
   
   V.init();
 
@@ -249,7 +249,7 @@ C.init = async function () {
 
 
 
-
+/*
 
 C.handler_clickOnMenucategory = async function (ev) {
   try {

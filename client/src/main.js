@@ -19,7 +19,6 @@ import { ActualitesView } from "./ui/actualites/index.js";
 import { MarquesView } from "./ui/marques/index.js";
 import { AchatsMagasinView } from "./ui/achatsmagasin/index.js";
 import { BienvenueView } from "./ui/bienvenue/index.js";
-import { ProfilView } from "./ui/profil/index.js";
 import { PanierVideView } from "./ui/paniervide/index.js";
 import { PanierItemsView } from "./ui/panieritems/index.js";
 import { panieritems } from "./data/panieritems.js";
@@ -38,6 +37,9 @@ import { CategorieAvantagesView } from "./ui/categorieavantages/index.js";
 import {CarrousselView} from "./ui/carroussel/index.js";
 import { postRequest } from "./lib/api-request.js";
 
+import { ProfilvideView } from "./ui/profilvide/index.js";
+import { profiluser } from "./data/profiluser.js";
+import { ProfiluserView } from "./ui/panieruser/index.js";
 
 let M = {};
 
@@ -118,7 +120,23 @@ V.init = function () {
       } else if (ev.target.closest("button") && ev.target.closest("button").value === "delete") {
         C.handler_clickOnstockdelete();
       }
+
+
+      if (ev.target && ev.target.value === "valider") {
+        C.handler_clickOnstockvalider();
+      } else if (ev.target.closest("button") && ev.target.closest("button").value === "valider") {
+        C.handler_clickOnstockvalider();
+      }
     });
+
+    let profilUserElement = document.querySelector("#profiluser");
+    if (profilUserElement) {
+      let profilClearButton = document.querySelector("#profil-clear");
+      if (profilClearButton) {
+      profilClearButton.addEventListener("click", C.handler_clickOnprofilclear);
+      }
+    }
+
   }
 
 
@@ -225,11 +243,25 @@ C.init = async function () {
     document.querySelector("#contentmenu").innerHTML = menuitem;
     let optionmenu = await option(M.menuoption0);
     document.querySelector("#option-content").innerHTML = optionmenu;
+
+    let dataprofil = ProfilData.get().user;
+    if (dataprofil === undefined) {
+      let profilVideView = await ProfilvideView.render();
+      document.querySelector("#profil-statut").innerHTML = profilVideView;
+    } else {
+      let profilUserVue = await profiluser(dataprofil);
+      document.querySelector("#profil-statut").innerHTML = profilUserVue;
+    }
+
+
+
+
     V.init();
     paniervisuel();
   }
   
   if (!window.location.pathname.includes("index.html")) {
+    
     V.init();
   }
 
@@ -411,30 +443,32 @@ C.handler_clickOnstockdelete = async function () {
 
 C.handler_clickOnstockvalider = async function () {
   try {
-    
-    let paniertab = PanierData.get();
-    let datacardpanier = await ProductData.fetchAll();
-    // Prepare data to send to the server
-    let dataToSend = paniertab.items.map(item => {
-        let product = datacardpanier.find(p => p.id_product === item.id);
-        return {
-            id_product: item.id,
-            number: item.number,
-            price: product.price
-        };
-    });
-    
-    
-    // Ensure PanierData.save is defined and returns a promise
-    let response = await PanierData.save(dataToSend); // Await the promise
-    if (response) {
-      // Clear the panier
-      PanierData.clear();
-      paniervisuel();
+    let dataprofil = ProfilData.get().user;
+    if (dataprofil !== undefined) {
+      let paniertab = PanierData.get();
+      let datacardpanier = await ProductData.fetchAll();
+      // Prepare data to send to the server
+      let dataToSend = paniertab.items.map(item => {
+          let product = datacardpanier.find(p => p.id_product === item.id);
+          return {
+              id_product: item.id,
+              number: item.number,
+              price: product.price
+          };
+      });
+      
+      // Ensure PanierData.save is defined and returns a promise
+      let response = await PanierData.save(dataToSend); // Await the promise
+      if (response) {
+        // Clear the panier
+        PanierData.clear();
+        paniervisuel();
+      }
+    } else {
+      let demande = ProfiluserView.render();
+      document.querySelector("#demandeprofil").innerHTML = demande;
     }
-
-
-      }catch (error) {
+  } catch (error) {
     console.error("Erreur dans handler_clickOnstockvalider :", error);
   }
 }
@@ -444,7 +478,11 @@ C.handler_clickOnhomepage = async function () {
   C.init();
 }
 
-
+C.handler_clickOnprofilclear=async function(){
+  
+ProfilData.clear();
+C.init(); 
+};
 
 
 

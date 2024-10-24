@@ -30,4 +30,5 @@
         </div>
     
         <button class="btn-blue w-full" value="valider">Voir mon panier</button>
+        <div id="demandeprofil"></div>
     </section>

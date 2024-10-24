@@ -1,6 +1,27 @@
 import {getRequest,postRequest,deleteRequest,patchRequest} from '../lib/api-request.js';
 
-let ProfilData = {};
+
+let ProfilData = {
+    user: undefined,
+};
+
+ProfilData.get = function() {
+    return {
+        user: this.user,
+    };
+};
+
+//genere une méthode clear qui supprime tout les éléments
+ProfilData.clear = function() {
+    this.user = undefined;
+};
+
+//genere une methode qui ajoute un élément
+ProfilData.add = function(item){
+    this.user.push(item);
+};
+
+
 
 ProfilData.fetch = async function(id){
     let data = await getRequest('profil/'+id);
@@ -15,7 +36,6 @@ ProfilData.fetchAll = async function(){
 ProfilData.save = async function (data) {
     try {
         let response = await postRequest('profil', JSON.stringify(data)); // Use postRequest here
-console.log(response);
         if (!response) {
             console.error('Server responded with an error');
             return false;

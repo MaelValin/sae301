@@ -23,12 +23,12 @@ PanierData.addOrIncrease = function(item){
     if (existingItem) {
         existingItem.number++;
         this.total += existingItem.price;
-        console.log(existingItem);
+        
     } else {
         item.number = 1; // Initialize the number property
         this.items.push(item);
         this.total += item.price;
-        console.log(item);
+        
     }
     this.nb++;
 };

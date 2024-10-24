@@ -1,6 +1,6 @@
 import { genericRenderer } from "../../lib/utils.js"; 
 
-const templateFile = await fetch("src/ui/profil/template.html.inc");
+const templateFile = await fetch("src/ui/profilvide/template.html.inc");
 const template = await templateFile.text();
 
 
@@ -24,7 +24,7 @@ const template = await templateFile.text();
     }
 }*/
 
-let ProfilView = {
+let ProfilvideView = {
     render: function(data){
         return genericRenderer(template, { items: data });
     }
@@ -32,4 +32,4 @@ let ProfilView = {
 
 
 
-export {ProfilView};
+export {ProfilvideView};

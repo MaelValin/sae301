@@ -70,18 +70,40 @@
     </button>
   </div>
   <div
-    class="flex flex-row justify-end gap-4 items-center md:col-span-1 md:col-start-3 col-span-1 col-start-2 row-start-1"
+    class="flex flex-row justify-end gap-4 items-center md:col-span-1 md:col-start-3 col-span-1 col-start-2 row-start-1 "
   >
-    <div class="nav__icons flex flex-row gap-4 md:gap-8">
+    <div class="nav__icons flex flex-row gap-4 md:gap-8 items-center">
       <a href="#" class="icon-btn"
         ><img src="src/assets/svg/nav/speech-bubble.svg" alt="aide"
       /></a>
       <a href="#" class="icon-btn"
         ><img src="src/assets/svg/nav/list.svg" alt="liste"
       /></a>
-      <a href="#" class="icon-btn"
-        ><img src="src/assets/svg/nav/profile.svg" alt="profil"
-      /></a>
+      <label
+      class="label inline-flex select-none cursor-pointer z-10 peer"
+      for="check2"
+    >
+      <div class="icon-btn"
+        >
+        <input type="checkbox" id="check2" class="hidden"/><img src="src/assets/svg/nav/profile.svg" alt="profil" class=" p-1 rounded-full hover:opacity-50"
+      /></div>
+    </label>
+    <!---->
+    <section class="profil bg-white top-full w-[220px] p-10 rounded-10 shadow-card ease-in-out duration-300 peer-has-[:checked]:translate-y-0 -translate-y-[150%] right-8 absolute">
+      <div id="profil-statut">
+        
+      </div>
+  
+      <div class="boutons-infos flex flex-col justify-center gap-10 py-10 border-b border-panier-grey place-items-center">
+          <a href="#" class="btn-black"><img class="icon" src="src/assets/svg/profil/compte.svg">Mon compte</a>
+          <a href="#" class="btn-black"><img class="icon" src="src/assets/svg/profil/achats.svg">Mes achats</a>
+          <a href="#" class="btn-black"><img class="icon" src="src/assets/svg/profil/avantages.svg">Mes avantages fidélités</a>
+          <a href="#" class="btn-black"><img class="icon" src="src/assets/svg/profil/infos.svg">Mes infos personnelles</a> 
+          <a href="#" class="btn"><img src="src/assets/svg/profil/faciliti.webp"></a>
+      </div>
+      <a href="#" class="btn-black py-10">Ma communauté</a>
+  </section>
+  <!---->
     </div>
 
     <label

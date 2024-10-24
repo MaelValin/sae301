@@ -1,5 +1,5 @@
 <div
-  class="product flex flex-col md:flex-row items-center gap-25 w-full justify-around"
+  class="product flex flex-col md:flex-row items-center gap-25 w-full justify-between"
 >
   <div class="product flex flex-row items-center gap-10 md:gap-29">
     <img

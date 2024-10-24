@@ -3,11 +3,11 @@
 >
   <div
   id="detail" data-filter="{{id}}" value="detail"
-    class="w-16 h-24 md:w-full md:h-64 flex justify-center row-start-1 col-span-1 md:col-span-2 hover:scale-95"
+    class="w-16 h-auto md:w-full md:h-64 flex justify-center row-start-1 col-span-1 md:col-span-2 hover:scale-95"
   >
     <img
     
-      class="w-16 h-24 md:w-auto md:h-auto"
+      class="w-16  md:w-auto h-auto"
       src="./src/assets/cardshop/{{image}}"
       alt="Product Image"
       id="detail"

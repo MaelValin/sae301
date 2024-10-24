@@ -1,8 +1,8 @@
 <section class="detailshop">
   <div
-    class=" detail-product w-screen grid grid-cols-[max-content] grid-rows-[auto,auto,auto,auto] md:grid-cols-[max-content,1fr,max-content]  md:grid-rows-[auto,1fr] px-15 py-10 md:px-60 md:pt-40 md:pb-20 font-sans gap-15 md:gap-10 items-center justify-center">
+    class=" detail-product w-screen grid grid-cols-[max-content] grid-rows-[auto,auto,auto,auto] md:grid-cols-[max-content,1fr,max-content]  md:grid-rows-[auto,1fr] px-15 py-10 md:px-60 md:pt-40 md:pb-20 font-sans gap-15 md:gap-10 items-center justify-center " >
     <div
-      class="image relative w-3/4 md:w-fit h-auto p-40 md:p-60 border rounded-5 md:col-start-1 md:col-end-2 md:row-start-1 md:row-end-3 row-start-2 row-end-3 justify-self-center">
+      class="image relative h-auto p-40 md:p-60 border rounded-5 md:col-start-1 md:col-end-2 md:row-start-1 md:row-end-3 row-start-2 row-end-3 justify-self-center w-rem20 md:w-rem30">
       <img class="img" src="src/assets/cardshop/{{image}}" alt="produit" >
       <div class="buttons absolute flex flex-col gap-10 right-9 top-11">
         <a href="#" class="button"><img class="p-7 border border-nav-blue rounded-5"

@@ -88,6 +88,8 @@ V.init = function () {
     category.addEventListener("click", C.handler_clickOnMenucategory);
     let option = document.querySelector("#option-content");
     option.addEventListener("click", C.handler_clickOnMenuoption);
+    let toutproduit = document.querySelector("#tout-produit")
+    toutproduit.addEventListener("click", C.handler_clickOnMenuoption);
 
     document.querySelector("#card").addEventListener("click", function (ev) {
       if (ev.target && ev.target.id === "detail") {
@@ -227,7 +229,9 @@ C.init = async function () {
     paniervisuel();
   }
   
-  V.init();
+  if (!window.location.pathname.includes("index.html")) {
+    V.init();
+  }
 
 
 

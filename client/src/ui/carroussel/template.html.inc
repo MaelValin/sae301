@@ -37,12 +37,14 @@
     <!--Fin à supprimer-->
     <button
       class="carrousel-suivant flex flex-col justify-center items-center px-15 py-10 gap-6 bg-white border shadow-md rounded-8"
+      data-filter="all" value="0" id="tout-produit"
     >
-      <p class="suivant-title text-20 font-800">Voir tous les produits</p>
+      <p class="suivant-title text-20 font-800" data-filter="all" value="0" id="tout-produit">Voir tous les produits</p>
       <img
         class="arrow w-[72px] h-auto"
         src="src/assets/svg/carrousel/arrow.svg"
         alt="suivant"
+        data-filter="all" value="0" id="tout-produit"
       />
     </button>
     <div class="btn-mobile md:hidden w-fill flex justify-center">

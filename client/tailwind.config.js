@@ -2,6 +2,8 @@
 export default {
   content: [
     "./index.html",
+    "./inscription.html",
+    "./connexion.html",
     "./src/**/*.{inc,html}",
   ],
   theme: {

@@ -26,6 +26,7 @@
     id="add-to-panier"
     data-filter="{{id}}"
     value="addpanier"
+    aria-label="achat"
   >
     <img src="./src/assets/cardshop/shopadd.svg" class="w-8" alt="" data-filter="{{id}}"
     value="addpanier" id="add-to-panier" />

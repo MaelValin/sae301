@@ -60,7 +60,11 @@ let postRequest = async function(uri, data){
 
     // Défition des options de la requêtes
     let options = {
+        Credentials:'include',
         method: 'POST',
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
         body: data
     }
 

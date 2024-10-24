@@ -28,7 +28,7 @@
   </div>
   <div class="carrousel flex flex-col md:flex-row px-10 md:px-0 gap-10 w-fit">
     <div
-      class="carrousel flex flex-col md:flex-row px-10 md:px-0 gap-10 w-fit"
+      class="carrousel flex flex-col md:flex-row md:px-10 md:px-0 gap-10 w-fit"
       id="carrousel"
     >
       <!--à supprimer-->

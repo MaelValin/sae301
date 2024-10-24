@@ -4,6 +4,7 @@ require_once "Controller/CategoryController.php";
 require_once "Controller/OptionController.php";
 require_once "Controller/ProductOptionController.php";
 require_once "Controller/PanierController.php";
+require_once "Controller/ProfilController.php";
 require_once "Class/HttpRequest.php";
 
 
@@ -34,6 +35,7 @@ $router = [
     "option" => new OptionController(),
     "productoption" => new ProductOptionController(),
     "panier" => new PanierController(),
+    "profil" => new ProfilController(),
 ];
 
 // objet HttpRequest qui contient toutes les infos utiles sur la requêtes (voir class/HttpRequest.php)

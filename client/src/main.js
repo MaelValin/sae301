@@ -31,10 +31,12 @@ import { FooterHautView } from "./ui/footerhaut/index.js";
 import { FooterBasView } from "./ui/footerbas/index.js";
 import { contentView } from "./ui/content-card/index.js";
 
+import { ProfilData } from "./data/profil.js";
+
 import { filtre } from "./data/filtre.js";
 import { CategorieAvantagesView } from "./ui/categorieavantages/index.js";
 import {CarrousselView} from "./ui/carroussel/index.js";
-
+/*
 
 let M = {};
 
@@ -94,6 +96,12 @@ V.init = function () {
     }
   });
 
+  let homepage = document.querySelector("#homepage");
+  homepage.addEventListener("click", C.handler_clickOnhomepage)
+
+
+
+
  
 
   document.querySelector("#panier").addEventListener("click", function (ev) {
@@ -113,11 +121,14 @@ V.init = function () {
       C.handler_clickOnstockdelete();
     }
 
-    if (ev.target && ev.target.value === "valider") {
-      C.handler_clickOnstockvalider();
-    } else if (ev.target.closest("button") && ev.target.closest("button").value === "valider") {
-      C.handler_clickOnstockvalider();
-    }
+
+
+
+
+
+
+   
+    
     
 });
 
@@ -143,18 +154,35 @@ let paniervisuel = async function () {
   }
 };
 
+
+////formulaire profil
+
+
 let C = {};
 
 
 
 C.init = async function () {
+  
   let data = await ProductData.fetchAll();
   let datacategory = await CategoryData.fetchAll();
   let dataoption = await OptionData.fetchAll();
   let nav = NavView.render(data);
 
 
-  let bienvenue = BienvenueView.render(data);
+//parti profil
+
+
+
+
+  
+    
+      
+ 
+  ///fin parti profil
+
+  if (window.location.pathname.includes("index.html")) {
+    let bienvenue = BienvenueView.render(data);
     document.querySelector("#card").innerHTML = bienvenue;
     let actualites = ActualitesView.render(data);
     document.querySelector("#card").innerHTML += actualites;
@@ -166,12 +194,11 @@ C.init = async function () {
     document.querySelector("#card").innerHTML += carroussel;
     document.querySelector("#card").innerHTML += pubfull;
 
-
     let card = await cardshop(data.slice(0, 3));
     document.querySelector("#carrousel").innerHTML += card;
 
     let categorieavantages = CategorieAvantagesView.render(data);
-    document.querySelector("#card").innerHTML+= categorieavantages;
+    document.querySelector("#card").innerHTML += categorieavantages;
     let actions = ActionsView.render(data);
     document.querySelector("#footer").innerHTML = actions;
     let footerhaut = FooterHautView.render(data);
@@ -179,19 +206,23 @@ C.init = async function () {
     let footerbas = FooterBasView.render(data);
     document.querySelector("#footer").innerHTML += footerbas;
 
-  let menuitem = await menu(datacategory);
-  document.querySelector("#nav").innerHTML = nav;
-  document.querySelector("#contentmenu").innerHTML = menuitem;
-  let optionmenu = await option(M.menuoption0);
-  document.querySelector("#option-content").innerHTML = optionmenu;
-  V.init();
-  paniervisuel();
+    let menuitem = await menu(datacategory);
+    document.querySelector("#nav").innerHTML = nav;
+    document.querySelector("#contentmenu").innerHTML = menuitem;
+    let optionmenu = await option(M.menuoption0);
+    document.querySelector("#option-content").innerHTML = optionmenu;
+    V.init();
+    paniervisuel();
+  }
+  
   
 
 
 
-
 };
+
+
+
 
 
 
@@ -393,9 +424,53 @@ C.handler_clickOnstockvalider = async function () {
 }
 
 
+C.handler_clickOnhomepage = async function () {
+  C.init();
+}
+
+*/
+
+document.addEventListener("DOMContentLoaded", function () {
+  let form = document.querySelector("#form"); console.log(form);
+  console.log("hello");
+  if (form) {
+    // Écouteur sur l'événement "submit" du formulaire
+    form.addEventListener("submit", async function (event) {
+      event.preventDefault(); // Empêche le comportement par défaut de rechargement de la page
+      console.log("hello");
+      let formData = new FormData(form); // Récupérer les données du formulaire
+      let formDataObj = {};
+      formData.forEach((value, key) => {
+        formDataObj[key] = value;
+      });
+
+      console.log("Données du formulaire :", formDataObj); // Vérifie les données dans la console
+
+      try {
+        // Envoie les données du formulaire à ProfilData.save()
+        await ProfilData.save(formDataObj); 
+        alert("Inscription réussie !");
+        
+        // Rediriger vers la page connexion.html après l'inscription
+        window.location.href = "connexion.html";
+      } catch (error) {
+        console.error("Erreur lors de l'inscription :", error);
+      }
+    });
+  } else {
+    console.error('Formulaire non trouvé');
+  }
+});
 
 
 
 
-C.init();
+
+
+
+
+
+
+/*
+C.init();*/
 

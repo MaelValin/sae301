@@ -5,11 +5,11 @@
     </div>
 
     <div class="panier-pub flex flex-row w-full justify-between items-center bg-panier-very-light-red rounded-5">
-        <img class="icon w-[51px] h-[51px] ml-5" src="src/assets/panier/promotion.png">
+        <img class="icon w-[51px] h-[51px] ml-5" src="src/assets/panier/promotion.png" alt="promo">
         <div class="content gap-20 w-fit h-full flex flex-col py-20">
             <div class="text w-fit">
                 <p class="label text-20 font-600">Profitez de toutes</p>
-                <p class="label text-16 font-600 text-panier-red-text">nos promos</p>
+                <p class="label text-16 font-600 text-panier-red-text" >nos promos</p>
             </div>
             <a href="#" class="btn-red">J’en profite</a>
         </div>
@@ -17,7 +17,7 @@
     </div>
     
     <div class="panier-pub flex flex-row w-full justify-between items-center bg-panier-very-light-yellow rounded-5">
-        <img class="icon w-[51px] h-[51px] ml-5" src="src/assets/panier/anti-inflation.webp">
+        <img class="icon w-[51px] h-[51px] ml-5" src="src/assets/panier/anti-inflation.webp" alt="anti-inflation">
         <div class="content gap-20 w-fit h-full flex flex-col py-20">
             <div class="text w-fit">
                 <p class="label text-20 font-600">Nos essentiels à</p>

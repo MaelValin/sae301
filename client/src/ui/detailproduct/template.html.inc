@@ -50,7 +50,7 @@
         <p class="text text-14 font-600">Le prix de ce produit dépend de votre mode de retrait (Drive ou Livraison) et
           de votre magasin.</p>
       </div>
-      <button href="#" class="button w-full py-11 rounded-5 text-center text-18 font-700 bg-nav-blue text-white" id="add-to-panier" data-filter="{{id}}" value="addpanier">Ajouter au
+      <button href="#" class="button w-full py-11 rounded-5 text-center text-18 font-700 bg-nav-blue text-white" id="add-to-panier" data-filter="{{id}}" value="addpanier" aria-label="achat">Ajouter au
         panier</button>
     </div>
   </div>

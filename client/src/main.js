@@ -124,11 +124,11 @@ V.init = function () {
 
     if (window.location.pathname.includes("inscription.html")) {
       let form = document.querySelector("#form");
-      console.log('Form element:', form); // Debugging statement to log the form element
+       // Debugging statement to log the form element
       if (form) {
           form.addEventListener("submit", async function (event) {
               event.preventDefault();
-              console.log('Form submitted'); // Debugging statement
+               // Debugging statement
 
               // Convert FormData to a plain object
               let formData = new FormData(event.target);
@@ -137,7 +137,7 @@ V.init = function () {
                   formDataObj[key] = value;
               });
 
-              console.log('Form data object:', formDataObj); // Debugging statement to log the form data object
+               // Debugging statement to log the form data object
 
               // Send data as JSON
               await ProfilData.save(formDataObj); // Make sure it's JSON stringified
@@ -350,7 +350,7 @@ C.handler_clickAddPanier = async function (ev) {
     let productId = ev.target.dataset.filter;
     let paniertab = PanierData.get();
     if (productId) {
-      console.log(PanierData.get());
+      
       let product = await ProductData.fetch(productId);
       
         PanierData.addOrIncrease({ id: parseInt(productId), price: product[0].price, number: 1 });
@@ -445,43 +445,6 @@ C.handler_clickOnhomepage = async function () {
 }
 
 
-
-document.addEventListener("DOMContentLoaded", function () {
-  let form = document.querySelector("#formulaire"); 
-  console.log(form);
-
-  if (form) {
-    // Écoute l'événement "submit" sur le formulaire
-    form.addEventListener("submit", async function (event) {
-      event.preventDefault(); // Empêche le comportement par défaut de soumission du formulaire
-
-      console.log("Soumission du formulaire interceptée.");
-
-      let formData = new FormData(form); // Récupère les données du formulaire
-      let formDataObj = {};
-      
-      // Convertir FormData en objet simple
-      formData.forEach((value, key) => {
-        formDataObj[key] = value;
-      });
-
-      console.log("Données du formulaire :", formDataObj); // Journaliser les données du formulaire pour le débogage
-
-      try {
-        // Envoie les données du formulaire à ProfilData.save()
-        await ProfilData.save(formDataObj); 
-        alert("Inscription réussie !");
-
-        // Redirige vers "connexion.html" après une soumission réussie
-        window.location.href = "connexion.html";
-      } catch (error) {
-        console.error("Erreur lors de l'inscription :", error);
-      }
-    });
-  } else {
-    console.error('Formulaire non trouvé');
-  }
-});
 
 
 
